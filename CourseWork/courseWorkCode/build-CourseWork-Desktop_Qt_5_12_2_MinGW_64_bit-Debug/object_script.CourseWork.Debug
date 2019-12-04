@@ -1,0 +1,14 @@
+debug/raytrace.o
+debug/drawlabel.o
+debug/main.o
+debug/mainwindow.o
+debug/face.o
+debug/mesh.o
+debug/point.o
+debug/sphere.o
+debug/.o
+debug/renderer.o
+debug/light.o
+debug/scene.o
+debug/moc_drawlabel.o
+debug/moc_mainwindow.o

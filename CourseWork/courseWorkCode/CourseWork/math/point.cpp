@@ -59,6 +59,13 @@ void Point::equal(const Point &other)
     setZ(other.getZ());
 }
 
+Point Point::operator= (const Point& a)
+{
+    this->equal(a);
+
+    return *this;
+}
+
 
 
 

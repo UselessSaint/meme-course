@@ -20,6 +20,8 @@ public:
 	Point vecMult(Point);
 
     void equal(const Point&);
+
+    Point operator= (const Point&);
 private:
 	double _x;
 	double _y;

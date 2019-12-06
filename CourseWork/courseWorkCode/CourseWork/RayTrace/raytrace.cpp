@@ -22,9 +22,15 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 
 		for (auto face : curObjFaces)
 		{
-			auto vects = face.getFaceVertices();
+			auto verts = face.getFaceVertices();
 
+			Point v1 = verts[1] - verts[0];
+			Point v2 = verts[2] - verts[0];
 
+			Point n = v1.vecMult(v2);
+			n.norm();
+
+			double div =
 		}
 	}
 }

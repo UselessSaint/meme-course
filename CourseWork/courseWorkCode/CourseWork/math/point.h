@@ -1,6 +1,8 @@
 #ifndef POINT_H
 #define POINT_H
 
+#include <cmath>
+
 class Point
 {
 public:
@@ -20,8 +22,10 @@ public:
 	Point vecMult(Point);
 
     void equal(const Point&);
+    void norm();
 
     Point operator= (const Point&);
+    Point operator- (const Point&);
 private:
 	double _x;
 	double _y;

@@ -66,7 +66,24 @@ Point Point::operator= (const Point& a)
     return *this;
 }
 
+Point Point::operator- (const Point& a)
+{
+    setX(getX() - a.getX());
+    setY(getY() - a.getX());
+    setZ(getZ() - a.getZ());
 
+    return *this;
+}
+
+void Point::norm()
+{
+    double vecLen = getX()*getX() + getY()*getY() + getZ()*getZ();
+    vecLen = sqrt(vecLen);
+
+    setX(getX()/vecLen);
+    setY(getY()/vecLen);
+    setZ(getZ()/vecLen);
+}
 
 
 

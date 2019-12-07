@@ -5,6 +5,7 @@
 #include "../math/mesh.h"
 #include "../math/point.h"
 #include "../math/face.h"
+#include <memory>
 
 class Sphere: public Object
 {
@@ -21,8 +22,8 @@ public:
     Point getColor() override;
     void setColor(Point value) override;
 
-    std::shared_ptr<Mesh> getMesh() override;
-    void setMesh(std::shared_ptr<Mesh>) override;
+    Mesh getMesh() override;
+    void setMesh(Mesh) override;
 
     double getReflecitonCoef() override;
     void setReflecitonCoef(double value) override;

@@ -5,6 +5,7 @@
 #include "../math/point.h"
 #include "../math/mesh.h"
 #include "../math/face.h"
+#include <iostream>
 
 class RayTrace
 {

@@ -9,27 +9,57 @@ Sphere::Sphere(Point center, double radius)
     setDispertionCoef(0.5);
     setGlossCoef(1);
 
-	Point color(255, 0, 0);
+    Point color(0, 255, 255);
 	setColor(color);
-/*
+
     double phi = 1.618033988749895;
 
     std::vector<Point> vecPt;
 
-    vecPt.push_back(Point(-radius, phi*radius, 0));
-    vecPt.push_back(Point(radius, phi*radius, 0));
-    vecPt.push_back(Point(-radius, -phi*radius, 0));
-    vecPt.push_back(Point(radius, -phi*radius, 0));
+    vecPt.push_back(Point(-radius + center.getX(), phi*radius + center.getY(), 0 + center.getZ()));
+    vecPt.push_back(Point(radius + center.getX(), phi*radius + center.getY(), 0 + center.getZ()));
+    vecPt.push_back(Point(-radius + center.getX(), -phi*radius + center.getY(), 0 + center.getZ()));
+    vecPt.push_back(Point(radius + center.getX(), -phi*radius + center.getY(), 0 + center.getZ()));
 
-    vecPt.push_back(Point(0, -radius, phi*radius));
-    vecPt.push_back(Point(0, radius, phi*radius));
-    vecPt.push_back(Point(0, -radius, -phi*radius));
-    vecPt.push_back(Point(0, radius, -phi*radius));
+    vecPt.push_back(Point(0 + center.getX(), -radius + center.getY(), phi*radius + center.getZ()));
+    vecPt.push_back(Point(0 + center.getX(), radius + center.getY(), phi*radius + center.getZ()));
+    vecPt.push_back(Point(0 + center.getX(), -radius + center.getY(), -phi*radius + center.getZ()));
+    vecPt.push_back(Point(0 + center.getX(), radius + center.getY(), -phi*radius + center.getZ()));
 
-    vecPt.push_back(Point(phi*radius, 0, -radius));
-    vecPt.push_back(Point(phi*radius, 0, radius));
-    vecPt.push_back(Point(-phi*radius, 0, -radius));
-    vecPt.push_back(Point(phi*radius, 0, radius));*/
+    vecPt.push_back(Point(phi*radius + center.getX(), 0 + center.getY(), -radius + center.getZ()));
+    vecPt.push_back(Point(phi*radius + center.getX(), 0 + center.getY(), radius + center.getZ()));
+    vecPt.push_back(Point(-phi*radius + center.getX(), 0 + center.getY(), -radius + center.getZ()));
+    vecPt.push_back(Point(phi*radius + center.getX(), 0 + center.getY(), radius + center.getZ()));
+
+	std::vector<Face> vecFs;
+
+	vecFs.push_back(Face(vecPt[0], vecPt[11], vecPt[5]));
+	vecFs.push_back(Face(vecPt[0], vecPt[5], vecPt[1]));
+	vecFs.push_back(Face(vecPt[0], vecPt[1], vecPt[7]));
+	vecFs.push_back(Face(vecPt[0], vecPt[7], vecPt[10]));
+	vecFs.push_back(Face(vecPt[0], vecPt[10], vecPt[11]));
+
+	vecFs.push_back(Face(vecPt[1], vecPt[5], vecPt[9]));
+	vecFs.push_back(Face(vecPt[5], vecPt[11], vecPt[4]));
+	vecFs.push_back(Face(vecPt[11], vecPt[10], vecPt[2]));
+	vecFs.push_back(Face(vecPt[10], vecPt[7], vecPt[6]));
+	vecFs.push_back(Face(vecPt[7], vecPt[1], vecPt[8]));
+
+	vecFs.push_back(Face(vecPt[3], vecPt[9], vecPt[4]));
+	vecFs.push_back(Face(vecPt[3], vecPt[4], vecPt[2]));
+	vecFs.push_back(Face(vecPt[3], vecPt[2], vecPt[6]));
+	vecFs.push_back(Face(vecPt[3], vecPt[6], vecPt[8]));
+	vecFs.push_back(Face(vecPt[3], vecPt[8], vecPt[9]));
+
+	vecFs.push_back(Face(vecPt[4], vecPt[9], vecPt[5]));
+	vecFs.push_back(Face(vecPt[2], vecPt[4], vecPt[11]));
+	vecFs.push_back(Face(vecPt[6], vecPt[2], vecPt[10]));
+	vecFs.push_back(Face(vecPt[8], vecPt[6], vecPt[7]));
+    vecFs.push_back(Face(vecPt[9], vecPt[8], vecPt[1]));
+
+    Mesh newMesh(vecPt, vecFs);
+
+    _mesh = newMesh;
 }
 
 double Sphere::getRadius() { return _radius; }
@@ -38,8 +68,8 @@ void Sphere::setRadius(double value) { _radius = value; }
 Point Sphere::getColor() { return _color; }
 void Sphere::setColor(Point value) { _color = value; }
 
-std::shared_ptr<Mesh> Sphere::getMesh() { return _mesh; };
-void Sphere::setMesh(std::shared_ptr<Mesh> value) { _mesh = value; };
+Mesh Sphere::getMesh() { return _mesh; };
+void Sphere::setMesh(Mesh value) { _mesh = value; };
 
 double Sphere::getReflecitonCoef() { return _reflectionCoef; }
 void Sphere::setReflecitonCoef(double value) { _reflectionCoef = value; }

@@ -68,11 +68,13 @@ Point Point::operator= (const Point& a)
 
 Point Point::operator- (const Point& a)
 {
-    setX(getX() - a.getX());
-    setY(getY() - a.getX());
-    setZ(getZ() - a.getZ());
+    Point res;
 
-    return *this;
+    res.setX(getX() - a.getX());
+    res.setY(getY() - a.getY());
+    res.setZ(getZ() - a.getZ());
+
+    return res;
 }
 
 void Point::norm()
@@ -85,6 +87,33 @@ void Point::norm()
     setZ(getZ()/vecLen);
 }
 
+Point Point::sign()
+{
+    Point res;
+
+    if (round(getX()) < 0)
+        res.setX(-1);
+    else if (round(getX()) > 0)
+        res.setX(1);
+    else
+        res.setX(0);
+
+    if (round(getY()) < 0)
+        res.setY(-1);
+    else if (round(getY()) > 0)
+        res.setY(1);
+    else
+        res.setY(0);
+
+    if (round(getZ()) < 0)
+        res.setZ(-1);
+    else if (round(getZ()) > 0)
+        res.setZ(1);
+    else
+        res.setZ(0);
+
+    return res;
+}
 
 
 

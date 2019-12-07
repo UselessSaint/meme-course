@@ -20,6 +20,7 @@ public:
 
 	double scalarMult(Point);
 	Point vecMult(Point);
+    Point sign();
 
     void equal(const Point&);
     void norm();

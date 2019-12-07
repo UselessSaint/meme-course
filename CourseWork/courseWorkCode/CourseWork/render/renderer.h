@@ -5,6 +5,7 @@
 #include <cmath>
 #include "../math/point.h"
 #include "../scene/scene.h"
+#include "../RayTrace/raytrace.h"
 
 class Renderer
 {
@@ -16,10 +17,11 @@ public:
 	void drawPoint(QColor &color, int x, int y);
 
 	void render(Scene &scene);
+    Point canvasToViewport(double x, double y);
 private:
 	QPainter *_painter;
 
-	// подкрючить рейтрейсер тута
+	//RayTrace _raytrace;
 	// подключить збуффер тута
 };
 

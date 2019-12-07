@@ -19,8 +19,8 @@ public:
     virtual Point getColor() = 0;
     virtual void setColor(Point value) = 0;
 
-    virtual std::shared_ptr<Mesh> getMesh() = 0;
-    virtual void setMesh(std::shared_ptr<Mesh>) = 0;
+    virtual Mesh getMesh() = 0;
+    virtual void setMesh(Mesh) = 0;
 
 	virtual double getReflecitonCoef() = 0;
 	virtual void setReflecitonCoef(double value) = 0;
@@ -33,7 +33,7 @@ public:
 protected:
 	Point _center;
     Point _color;
-    std::shared_ptr<Mesh> _mesh;
+    Mesh _mesh;
 
 	double _reflectionCoef;
 	double _dispertionCoef;

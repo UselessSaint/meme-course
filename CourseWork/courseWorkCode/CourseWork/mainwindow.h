@@ -9,6 +9,7 @@
 #include <iostream>
 #include "render/renderer.h"
 #include "objects/sphere.h"
+#include <time.h>
 
 namespace Ui {
 class MainWindow;

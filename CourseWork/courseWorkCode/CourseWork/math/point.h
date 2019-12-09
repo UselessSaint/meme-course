@@ -28,6 +28,10 @@ public:
 
     Point operator= (const Point&);
 	Point operator- (const Point&);
+	Point operator+ (const Point&);
+	Point operator* (const double&);
+	bool operator== (const Point&);
+	bool operator!= (const Point&);
 private:
 	double _x;
 	double _y;

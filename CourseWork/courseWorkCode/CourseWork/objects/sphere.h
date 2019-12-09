@@ -13,28 +13,26 @@ public:
     Sphere() = default;
     Sphere(Point, double);
 
-    double getRadius();
+	double getRadius() override;
     void setRadius(double value);
 
-    Point getCenter() override;
+	Point getCenter() const override;
     void setCenter(Point value) override;
 
-    Point getColor() override;
+	Point getColor() const override;
     void setColor(Point value) override;
 
-    Mesh getMesh() override;
-    void setMesh(Mesh) override;
+	std::shared_ptr<Mesh> getMesh() const override;
+	void setMesh(std::shared_ptr<Mesh>) override;
 
-    double getReflecitonCoef() override;
+	double getReflecitonCoef() const override;
     void setReflecitonCoef(double value) override;
 
-    double getDispertionCoef() override;
+	double getDispertionCoef() const override;
     void setDispertionCoef(double value) override;
 
-    double getGlossCoef() override;
+	double getGlossCoef() const override;
     void setGlossCoef(double value) override;
-private:
-    double _radius;
 };
 
 #endif // SPHERE_H

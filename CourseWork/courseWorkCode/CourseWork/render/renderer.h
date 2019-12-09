@@ -17,12 +17,8 @@ public:
 	void drawPoint(QColor &color, int x, int y);
 
 	void render(Scene &scene);
-    Point canvasToViewport(double x, double y);
 private:
 	QPainter *_painter;
-
-	//RayTrace _raytrace;
-	// подключить збуффер тута
 };
 
 #endif // RENDERER_H

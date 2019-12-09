@@ -38,6 +38,7 @@ public:
         MainWindow->setMaximumSize(QSize(1100, 800));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setMaximumSize(QSize(1100, 800));
         horizontalLayout = new QHBoxLayout(centralWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -54,6 +55,7 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         pushButton = new QPushButton(frame);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setMaximumSize(QSize(300, 800));
 
         verticalLayout->addWidget(pushButton);
 

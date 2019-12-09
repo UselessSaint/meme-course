@@ -1,0 +1,13 @@
+release/raytrace.o
+release/drawlabel.o
+release/main.o
+release/mainwindow.o
+release/face.o
+release/mesh.o
+release/point.o
+release/sphere.o
+release/renderer.o
+release/light.o
+release/scene.o
+release/moc_drawlabel.o
+release/moc_mainwindow.o

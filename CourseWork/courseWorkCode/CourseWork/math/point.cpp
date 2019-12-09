@@ -123,6 +123,44 @@ double Point::len()
 	return vecLen;
 }
 
+Point Point::operator*(const double &other)
+{
+	Point res(getX()*other,
+			  getY()*other,
+			  getZ()*other);
+
+	return res;
+}
+
+Point Point::operator+(const Point &other)
+{
+	Point res;
+
+	res.setX(getX() + other.getX());
+	res.setY(getY() + other.getY());
+	res.setZ(getZ() + other.getZ());
+
+	return res;
+}
+
+bool Point::operator==(const Point &other)
+{
+	if (other.getX() == getX() &&
+		other.getY() == getY() &&
+		other.getZ() == getZ())
+		return true;
+	return false;
+}
+
+bool Point::operator!=(const Point &other)
+{
+	if (other.getX() != getX() ||
+		other.getY() != getY() ||
+		other.getZ() != getZ())
+		return true;
+	return false;
+}
+
 
 
 

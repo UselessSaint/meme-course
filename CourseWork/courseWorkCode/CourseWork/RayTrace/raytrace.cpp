@@ -3,11 +3,7 @@
 RayTrace::RayTrace(){}
 
 RayTrace::RayTrace(Scene *scene): _scene(scene) {}
-/*
-void setScene(Scene *scene)
-{
-}
-*/
+
 Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 {
 	auto sceneObjs = _scene->getObjects();
@@ -19,7 +15,16 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 	for (auto obj : sceneObjs)
 	{
         auto curObjMesh = obj->getMesh();
-        auto curObjFaces = curObjMesh.getFaces();
+		auto curObjFaces = curObjMesh->getFaces();
+
+		Point viewCenterVec = start - obj->getCenter();
+		double B = 2*(direction.getX()*viewCenterVec.getX() +
+					  direction.getY()*viewCenterVec.getY() +
+					  direction.getZ()*viewCenterVec.getZ());
+		double C = viewCenterVec.len()*viewCenterVec.len() - obj->getRadius()*obj->getRadius();
+
+		if ((B*B - 4*C) < 0.0)
+			continue;
 
 		for (auto face : curObjFaces)
 		{
@@ -49,9 +54,9 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 						start.getY() + t*direction.getY(),
                         start.getZ() + t*direction.getZ());
 
-			Point vecToCenter = (*obj).getCenter() - curPt;
+			Point vecToCenter = obj->getCenter() - curPt;
 			vecToCenter.norm();
-/*
+
 			if ( (n.getX() * vecToCenter.getX() >= 0) &&
 				 (n.getY() * vecToCenter.getY() >= 0) &&
 				 (n.getZ() * vecToCenter.getZ() >= 0))
@@ -60,7 +65,7 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 				n.setY(n.getY()*(-1));
 				n.setZ(n.getZ()*(-1));
 			}
-*/
+
 			Point vecs[3];
 
             vecs[0] = (verts[1] - verts[0]).vecMult(curPt - verts[0]);
@@ -75,23 +80,29 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
                  (vecs[0].getY()*vecs[1].getY()) >= 0 && (vecs[1].getY()*vecs[2].getY()) >= 0 && (vecs[2].getY()*vecs[0].getY()) >= 0 &&
                  (vecs[0].getZ()*vecs[1].getZ()) >= 0 && (vecs[1].getZ()*vecs[2].getZ()) >= 0 && (vecs[2].getZ()*vecs[0].getZ()) >= 0 )
 			{
-				if (closestT == 0.0 && depth >= 0)
-				{
-					closestT = t;
-                    closestColor = obj->getColor();
-					curPt.setX(curPt.getX() + n.getX());
-					curPt.setY(curPt.getY() + n.getY());
-					curPt.setZ(curPt.getZ() + n.getZ());
-					closestColor = calcLight(curPt, closestColor);
-				}
-				if (closestT > t && depth >= 0)
+				if (closestT > t || closestT == 0.0)
 				{
 					closestT = t;
 					closestColor = obj->getColor();
 					curPt.setX(curPt.getX() + n.getX());
 					curPt.setY(curPt.getY() + n.getY());
 					curPt.setZ(curPt.getZ() + n.getZ());
-					closestColor = calcLight(curPt, closestColor);
+
+					Point reflRay = n*n.scalarMult(direction);
+					reflRay = reflRay * (-2.0);
+					reflRay = reflRay + direction;
+					reflRay.norm();
+
+					closestColor = calcLight(curPt, closestColor, n, start, *obj);
+					if (depth > 0)
+					{
+						Point refColor = traceRay(curPt, reflRay, depth-1);
+
+						if (refColor != bgColor)
+						{
+							closestColor = closestColor + refColor*obj->getReflecitonCoef();
+						}
+					}
 				}
 			}
 		}
@@ -102,27 +113,30 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 
 
 
-Point RayTrace::calcLight(Point &start, Point &objColor)
+Point RayTrace::calcLight(Point &start, Point &objColor, Point &n, Point &view, const Object &curObj)
 {
 	auto sceneLights = _scene->getLights();
 
 	Point res(0, 0, 0);
 	double intens = 0.0;
 
-	for (auto plt : sceneLights)
+	for (auto lt : sceneLights)
 	{
-		auto lt = *plt;
-
-		Point dir = lt.getPos() - start;
+		Point dir = lt->getPos() - start;
 		double lenBetween = dir.len();
 		dir.norm();
 
+		Point reflRay = n*n.scalarMult(dir*-1);
+		reflRay = reflRay * (-2.0);
+		reflRay = reflRay + dir;
+		reflRay.norm();
+
 		if (!isIntersecting(start, dir))
 		{
-			intens += lt.getIntens() / lenBetween;
-
-			if (intens > 1)
-				intens = 1;
+			double curLtIntent = lt->getIntens() / lenBetween;
+			//intens += curObj.getDispertionCoef()*dir.scalarMult(n)*curLtIntent;
+			//intens += curObj.getGlossCoef()*(view-start).scalarMult(reflRay)*curLtIntent;
+			intens += curLtIntent;
 		}
 
 	}
@@ -146,7 +160,7 @@ bool RayTrace::isIntersecting(Point &start, Point &direction)
 	for (auto obj : sceneObjs)
 	{
 		auto curObjMesh = obj->getMesh();
-		auto curObjFaces = curObjMesh.getFaces();
+		auto curObjFaces = curObjMesh->getFaces();
 
 		for (auto face : curObjFaces)
 		{

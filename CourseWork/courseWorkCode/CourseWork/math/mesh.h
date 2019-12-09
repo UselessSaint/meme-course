@@ -12,7 +12,6 @@ public:
     Mesh(std::vector<Point> &p, std::vector<Face> &f);
 
     std::vector<Point> getVertices();
-
     std::vector<Face> getFaces();
 private:
 	std::vector<Point> _vertices;

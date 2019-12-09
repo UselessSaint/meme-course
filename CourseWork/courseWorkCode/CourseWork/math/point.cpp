@@ -115,6 +115,13 @@ Point Point::sign()
     return res;
 }
 
+double Point::len()
+{
+	double vecLen = getX()*getX() + getY()*getY() + getZ()*getZ();
+	vecLen = sqrt(vecLen);
+
+	return vecLen;
+}
 
 
 

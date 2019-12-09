@@ -29,16 +29,24 @@ void MainWindow::on_pushButton_clicked()
 	auto renderer = new Renderer(&painter);
 
 	auto scene = new Scene();
-    Point sPos(0, 0, 130);
-    auto sph = new Sphere(sPos, 20);
+	auto sph = new Sphere(Point(0, 0, 1000), 200);
+	sph->setColor(Point(255,0,0));
 
 	std::shared_ptr<Object> psph(sph);
-    scene->addObject(psph);
+	scene->addObject(psph);
 
-    renderer->render(*scene);
+	auto newObj = new Sphere(Point(0,0,800), 800);
+	newObj->setColor(Point(0, 255, 255));
+	std::shared_ptr<Object> psph2(newObj);
+	//scene->addObject(psph2);
+
+	auto newLt = new Light(Point(0, 0, -200), 400);
+	std::shared_ptr<Light> pnewLt(newLt);
+	scene->addLight(pnewLt);
+
+	renderer->render(*scene);
 
     _draw_label->update();
-
 }
 
 

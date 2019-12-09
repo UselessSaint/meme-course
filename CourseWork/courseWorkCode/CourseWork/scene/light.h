@@ -13,6 +13,9 @@ public:
     Light();
     Light(Point, double);
 
+	Point getPos();
+	double getIntens();
+
 private:
 	Point _position;
 	double _intens;

@@ -57,9 +57,28 @@ Sphere::Sphere(Point center, double radius)
 	vecFs.push_back(Face(vecPt[8], vecPt[6], vecPt[7]));
     vecFs.push_back(Face(vecPt[9], vecPt[8], vecPt[1]));
 
-    Mesh newMesh(vecPt, vecFs);
+	Mesh newMesh(vecPt, vecFs);
 
-    _mesh = newMesh;
+	_mesh = newMesh;
+/*
+	std::vector<Point> vecPt;
+
+	vecPt.push_back(Point(center.getX(), center.getY()+radius/4, center.getZ()-radius/2));
+	vecPt.push_back(Point(center.getX()+radius, center.getY()+radius/4, center.getZ()));
+	vecPt.push_back(Point(center.getX()+radius, center.getY()+radius, center.getZ()));
+	vecPt.push_back(Point(center.getX()-radius, center.getY(), center.getZ()+radius));
+
+	std::vector<Face> vf;
+
+	vf.push_back(Face(vecPt[0], vecPt[1], vecPt[2]));
+	//vf.push_back(Face(vecPt[3], vecPt[1], vecPt[2]));
+	vf.push_back(Face(vecPt[0], vecPt[3], vecPt[1]));
+	vf.push_back(Face(vecPt[0], vecPt[3], vecPt[2]));
+
+
+	Mesh newMesh(vecPt, vf);
+
+	_mesh = newMesh;*/
 }
 
 double Sphere::getRadius() { return _radius; }

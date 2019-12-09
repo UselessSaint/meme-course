@@ -26,17 +26,16 @@ void Renderer::render(Scene &scene)
 
 	auto size = getSize();
 
-    //Point viewPos(std::get<0>(size)/2, std::get<1>(size)/2, 100);
-    Point viewPos(0, 0, 0);
+	Point viewPos(0, 0, -800);
 
-    for (int x = -size.second/2; x < size.first/2; x++)
+	for (int x = -size.second/2; x < size.first/2; x++)
 	{
-        for (int y = -size.second/2; y < size.second/2; y++)
+		for (int y = -size.second/2; y < size.second/2; y++)
 		{
-            //Point dir = canvasToViewport(x, y);
-            Point dir(x, y, 100);
-            dir = dir - viewPos;
-            dir.norm();
+			//Point dir = canvasToViewport(x, y);
+			Point dir(x, y, 0);
+			dir = dir - viewPos;
+			dir.norm();
             Point curColor = raytracer->traceRay(viewPos, dir, 0);
             QColor q_color(curColor.getX(), curColor.getY(), curColor.getZ());
 
@@ -46,8 +45,8 @@ void Renderer::render(Scene &scene)
 }
 
 Point Renderer::canvasToViewport(double x, double y) {
-    auto size = getSize();
-//    size.first = size.second = 600;
-    double v = double(size.second) / size.first;
-    return {x / v / size.first, y / size.second, 1};
+	//auto size = getSize();
+	//double v = double(size.second) / size.first;
+	//return {x / size.first, y / size.second, 3};
+	return {x / 16, y / 16, 3};
 }

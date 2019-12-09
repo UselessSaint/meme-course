@@ -5,6 +5,7 @@
 #include "../math/point.h"
 #include "../math/mesh.h"
 #include "../math/face.h"
+#include "../scene/light.h"
 #include <iostream>
 
 class RayTrace
@@ -15,7 +16,8 @@ public:
 
 	void setScene(Scene *scene);
 	Point traceRay(Point &start, Point &direction, int depth);
-
+	Point calcLight(Point &start, Point &objColor);
+	bool isIntersecting(Point &start, Point &dir);
 private:
 	Scene *_scene;
 };

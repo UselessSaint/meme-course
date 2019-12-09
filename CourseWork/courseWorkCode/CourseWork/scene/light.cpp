@@ -15,3 +15,6 @@ Light::Light(Point p, double i): _intens(i)
 	_position.setY(p.getY());
 	_position.setZ(p.getZ());
 }
+
+Point Light::getPos() { return _position; }
+double Light::getIntens() { return _intens; }

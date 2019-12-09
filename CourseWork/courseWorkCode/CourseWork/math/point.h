@@ -21,12 +21,13 @@ public:
 	double scalarMult(Point);
 	Point vecMult(Point);
     Point sign();
+	double len();
 
     void equal(const Point&);
     void norm();
 
     Point operator= (const Point&);
-    Point operator- (const Point&);
+	Point operator- (const Point&);
 private:
 	double _x;
 	double _y;

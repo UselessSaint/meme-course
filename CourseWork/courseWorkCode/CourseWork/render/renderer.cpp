@@ -35,7 +35,7 @@ void Renderer::render(Scene &scene)
 			Point dir(x, y, 0);
 			dir = dir - viewPos;
 			dir.norm();
-			Point curColor = raytracer->traceRay(viewPos, dir, 2);
+			Point curColor = raytracer->traceRay(viewPos, dir, 3);
 			if (curColor.getX() > 255)
 				curColor.setX(255);
 			if (curColor.getX() < 0)

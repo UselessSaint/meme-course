@@ -131,12 +131,13 @@ Point RayTrace::calcLight(Point &start, Point &objColor, Point &n, Point &view, 
 		reflRay = reflRay + dir;
 		reflRay.norm();
 
+		Point tmp = (start-view);
+		tmp.norm();
+
 		if (!isIntersecting(start, dir))
 		{
 			double curLtIntent = lt->getIntens() / lenBetween;
-			//intens += curObj.getDispertionCoef()*dir.scalarMult(n)*curLtIntent;
-			//intens += curObj.getGlossCoef()*(view-start).scalarMult(reflRay)*curLtIntent;
-			intens += curLtIntent;
+			intens += curObj.getDispertionCoef()*dir.scalarMult(n)*curLtIntent;
 		}
 
 	}

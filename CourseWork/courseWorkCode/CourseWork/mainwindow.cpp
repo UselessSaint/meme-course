@@ -30,12 +30,12 @@ void MainWindow::on_pushButton_clicked()
 
 	auto scene = new Scene();
 
-	auto sph = new Sphere(Point(340, 0, 400), 200);
+	auto sph = new Sphere(Point(450, 0, 400), 200);
 	sph->setColor(Point(255,0,0));
 	std::shared_ptr<Object> psph(sph);
 	scene->addObject(psph);
 
-	auto sph2 = new Sphere(Point(-100, 0,600), 200);
+	auto sph2 = new Sphere(Point(-100, 0, 400), 200);
 	sph2->setColor(Point(255,255,0));
 	std::shared_ptr<Object> psph2(sph2);
 	scene->addObject(psph2);
@@ -45,7 +45,7 @@ void MainWindow::on_pushButton_clicked()
 	std::shared_ptr<Object> psph3(sph3);
 	scene->addObject(psph3);
 
-	auto newLt = new Light(Point(120, 250, -200), 150);
+	auto newLt = new Light(Point(0, 0, 0), 200);
 	std::shared_ptr<Light> pnewLt(newLt);
 	scene->addLight(pnewLt);
 

@@ -28,30 +28,19 @@ void Renderer::render(Scene &scene)
 
 	Point viewPos(0, 0, -800);
 
-	for (int x = -size.second/2; x < size.first/2; x++)
+	for (int x = -size.first/2; x < size.first/2; x++)
 	{
 		for (int y = -size.second/2; y < size.second/2; y++)
 		{
+			//viewPos.setX(x);
+			//viewPos.setY(y);
+
 			Point dir(x, y, 0);
 			dir = dir - viewPos;
 			dir.norm();
-			Point curColor = raytracer->traceRay(viewPos, dir, 3);
-			if (curColor.getX() > 255)
-				curColor.setX(255);
-			if (curColor.getX() < 0)
-				curColor.setX(0);
+			Point curColor = raytracer->traceRay(viewPos, dir, 0);
 
-			if (curColor.getY() > 255)
-				curColor.setY(255);
-			if (curColor.getY() < 0)
-				curColor.setY(0);
-
-			if (curColor.getZ() > 255)
-				curColor.setZ(255);
-			if (curColor.getZ() < 0)
-				curColor.setZ(0);
 			QColor q_color(curColor.getX(), curColor.getY(), curColor.getZ());
-			//std::cout << curColor.getX();
 
 			drawPoint(q_color, x, y);
 		}

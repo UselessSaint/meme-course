@@ -7,7 +7,7 @@ Sphere::Sphere(Point center, double radius)
 
 	setReflecitonCoef(0.8);
 	setDispertionCoef(0.8);
-	setGlossCoef(4);
+	setGlossCoef(200);
 
     Point color(0, 255, 255);
 	setColor(color);

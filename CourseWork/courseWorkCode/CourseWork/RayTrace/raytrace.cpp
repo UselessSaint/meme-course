@@ -93,7 +93,7 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 					reflRay = reflRay + direction;
 					reflRay.norm();
 
-					closestColor = calcLight(curPt, closestColor, n, start, *obj);
+					closestColor = calcLight(curPt, closestColor, n, start, reflRay, *obj);
 					if (depth > 0)
 					{
 						Point refColor = traceRay(curPt, reflRay, depth-1);
@@ -113,7 +113,7 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 
 
 
-Point RayTrace::calcLight(Point &start, Point &objColor, Point &n, Point &view, const Object &curObj)
+Point RayTrace::calcLight(Point &start, Point &objColor, Point &n, Point &view, Point &reflRay, const Object &curObj)
 {
 	auto sceneLights = _scene->getLights();
 
@@ -126,26 +126,26 @@ Point RayTrace::calcLight(Point &start, Point &objColor, Point &n, Point &view, 
 		double lenBetween = dir.len();
 		dir.norm();
 
-		Point reflRay = n*n.scalarMult(dir*-1);
-		reflRay = reflRay * (-2.0);
-		reflRay = reflRay + dir;
-		reflRay.norm();
-
 		Point tmp = (start-view);
 		tmp.norm();
+		reflRay.norm();
 
 		if (!isIntersecting(start, dir))
 		{
 			double curLtIntent = lt->getIntens() / lenBetween;
-			intens += curObj.getDispertionCoef()*dir.scalarMult(n)*curLtIntent;
+			intens += curObj.getDispertionCoef()*fabs(dir.scalarMult(n))*curLtIntent;
+			intens += curObj.getReflecitonCoef()*pow(fabs(tmp.scalarMult(reflRay)), curObj.getGlossCoef())*curLtIntent;
+			//std::cout << tmp.scalarMult(reflRay);
+			break;
 		}
-
 	}
 
 	intens += 0.2;
 
 	if (intens > 1)
 		intens = 1;
+	if (intens < 0)
+		intens = 0;
 
 	res.setX(objColor.getX()*intens);
 	res.setY(objColor.getY()*intens);

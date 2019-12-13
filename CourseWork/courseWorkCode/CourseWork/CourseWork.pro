@@ -32,10 +32,12 @@ SOURCES += \
         math/face.cpp \
         math/mesh.cpp \
         math/point.cpp \
+    objects/parallelepiped.cpp \
         objects/sphere.cpp \
     render/renderer.cpp \
     scene/light.cpp \
-    scene/scene.cpp
+    scene/scene.cpp \
+    z_buffer/zbuffer.cpp
 
 HEADERS += \
         RayTrace/raytrace.h \
@@ -45,10 +47,12 @@ HEADERS += \
         math/mesh.h \
         math/point.h \
         objects/object.h \
+        objects/parallelepiped.h \
         objects/sphere.h \
         render/renderer.h \
         scene/light.h \
-        scene/scene.h
+        scene/scene.h \
+        z_buffer/zbuffer.h
 
 FORMS += \
         mainwindow.ui

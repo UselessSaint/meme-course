@@ -5,9 +5,11 @@ release/mainwindow.o
 release/face.o
 release/mesh.o
 release/point.o
+release/parallelepiped.o
 release/sphere.o
 release/renderer.o
 release/light.o
 release/scene.o
+release/zbuffer.o
 release/moc_drawlabel.o
 release/moc_mainwindow.o

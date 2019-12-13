@@ -6,19 +6,26 @@
 #include "../math/point.h"
 #include "../scene/scene.h"
 #include "../RayTrace/raytrace.h"
+#include <mutex>
+#include <thread>
+#include <functional>
+#include "z_buffer/zbuffer.h"
 
 class Renderer
 {
 public:
 	Renderer(QPainter *painter);
 
-	void drawLine(Point &p1,Point &p2);
 	std::pair<int, int> getSize();
 	void drawPoint(QColor &color, int x, int y);
 
-	void render(Scene &scene);
+	void renderRaytrace(Scene &scene, int depth);
+	void renderZBuffer(Scene &scene);
 private:
 	QPainter *_painter;
+	std::mutex _mutex;
+
+	void raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEdges, Point viewPos, int depth);
 };
 
 #endif // RENDERER_H

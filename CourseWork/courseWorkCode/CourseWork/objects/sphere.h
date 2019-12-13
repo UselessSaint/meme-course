@@ -33,6 +33,9 @@ public:
 
 	double getGlossCoef() const override;
     void setGlossCoef(double value) override;
+
+	void setName(std::string) override;
+	std::string getName() const override;
 };
 
 #endif // SPHERE_H

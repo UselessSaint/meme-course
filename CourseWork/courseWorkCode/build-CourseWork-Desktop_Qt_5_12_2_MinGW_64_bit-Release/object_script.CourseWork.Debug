@@ -5,9 +5,11 @@ debug/mainwindow.o
 debug/face.o
 debug/mesh.o
 debug/point.o
+debug/parallelepiped.o
 debug/sphere.o
 debug/renderer.o
 debug/light.o
 debug/scene.o
+debug/zbuffer.o
 debug/moc_drawlabel.o
 debug/moc_mainwindow.o

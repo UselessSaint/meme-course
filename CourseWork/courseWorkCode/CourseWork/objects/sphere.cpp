@@ -7,12 +7,12 @@ Sphere::Sphere(Point center, double radius)
 
 	setReflecitonCoef(0.8);
 	setDispertionCoef(0.8);
-	setGlossCoef(200);
+	setGlossCoef(1000);
 
-    Point color(0, 255, 255);
+	Point color(255, 255, 255);
 	setColor(color);
 
-    double phi = 1.618033988749895;
+	double phi = (1 + sqrt(5))/2;//1.618033988749895;
 	double icoRadius = radius/sqrt(1+phi*phi);
 
     std::vector<Point> vecPt;
@@ -31,8 +31,6 @@ Sphere::Sphere(Point center, double radius)
 	vecPt.push_back(Point(phi*icoRadius + center.getX(), 0 + center.getY(), icoRadius + center.getZ()));
 	vecPt.push_back(Point(-phi*icoRadius + center.getX(), 0 + center.getY(), -icoRadius + center.getZ()));
 	vecPt.push_back(Point(-phi*icoRadius + center.getX(), 0 + center.getY(), icoRadius + center.getZ()));
-
-	//setRadius(getRadius()*phi);
 
 	std::vector<Face> vecFs;
 
@@ -62,24 +60,6 @@ Sphere::Sphere(Point center, double radius)
 
 	std::shared_ptr<Mesh> pNewMesh(new Mesh(vecPt, vecFs));
 	setMesh(pNewMesh);
-/*
-	std::vector<Point> vecPt;
-
-	vecPt.push_back(Point(center.getX(), center.getY()+icoRadius/4, center.getZ()-icoRadius/2));
-	vecPt.push_back(Point(center.getX()+icoRadius, center.getY()+icoRadius/4, center.getZ()));
-	vecPt.push_back(Point(center.getX()+icoRadius, center.getY()+icoRadius, center.getZ()));
-	vecPt.push_back(Point(center.getX()-icoRadius, center.getY()-icoRadius/4, center.getZ()+icoRadius));
-
-	std::vector<Face> vf;
-
-	vf.push_back(Face(vecPt[0], vecPt[1], vecPt[2]));
-	vf.push_back(Face(vecPt[3], vecPt[1], vecPt[2]));
-	vf.push_back(Face(vecPt[0], vecPt[3], vecPt[1]));
-	vf.push_back(Face(vecPt[0], vecPt[3], vecPt[2]));
-
-
-	std::shared_ptr<Mesh> pNewMesh(new Mesh(vecPt, vf));
-	setMesh(pNewMesh);*/
 }
 
 double Sphere::getRadius() { return _radius; }
@@ -103,5 +83,7 @@ void Sphere::setGlossCoef(double value) { _glossCoef = value; }
 Point Sphere::getCenter() const { return _center; }
 void Sphere::setCenter(Point value) { _center = value; }
 
+void Sphere::setName(std::string name) { _name = name; };
+std::string Sphere::getName() const { return _name; };
 
 

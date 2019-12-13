@@ -10,6 +10,8 @@
 #include "render/renderer.h"
 #include "objects/sphere.h"
 #include <time.h>
+#include "objects/parallelepiped.h"
+#include "z_buffer/zbuffer.h"
 
 namespace Ui {
 class MainWindow;

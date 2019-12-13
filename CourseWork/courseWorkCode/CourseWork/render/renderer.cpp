@@ -2,13 +2,6 @@
 
 Renderer::Renderer(QPainter *painter): _painter(painter) {}
 
-void Renderer::drawLine(Point &p1,Point &p2) {
-	auto w = _painter->window().width() / 2;
-	auto h = _painter->window().height() / 2;
-	_painter->drawLine(w + std::round(p1.getX()), h - std::round(p1.getY()),
-					   w + std::round(p2.getX()), h - std::round(p2.getY()));
-}
-
 void Renderer::drawPoint(QColor &color, int x, int y) {
 	auto w = _painter->window().width() / 2;
 	auto h = _painter->window().height() / 2;
@@ -20,29 +13,87 @@ std::pair<int, int> Renderer::getSize() {
 	return {_painter->window().width(), _painter->window().height()};
 }
 
-void Renderer::render(Scene &scene)
+void Renderer::renderRaytrace(Scene &scene, int depth)
 {
 	auto raytracer = new RayTrace(&scene);
-
 	auto size = getSize();
 
-	Point viewPos(0, 0, -800);
+    Point viewPos(0, 0, -800);
+
+	std::vector<std::thread> threads;
+	int amountOfThreads = 4;
+
+	int deltaY = size.second / amountOfThreads;
+
+	for (int i = 0; i < amountOfThreads ; i++)
+	{
+		std::pair<int, int> yEdges = {-size.second/2 + i*deltaY, -size.second/2 + (i+1)*deltaY};
+
+		std::thread thread(
+					[this](RayTrace rt, std::pair<int, int> yEdges, Point viewPos, int depth) { this->raytraceThreadRender(rt, yEdges, viewPos, depth); },
+		*raytracer, yEdges, viewPos, depth);
+
+		threads.push_back(std::move(thread));
+	}
+
+	for (auto &thr: threads)
+	{
+		if (thr.joinable())
+		{
+			thr.join();
+		}
+	}
+}
+
+void Renderer::raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEdges, Point viewPos, int depth)
+{
+	auto size = getSize();
 
 	for (int x = -size.first/2; x < size.first/2; x++)
 	{
-		for (int y = -size.second/2; y < size.second/2; y++)
+		for (int y = yEdges.first; y < yEdges.second; y++)
 		{
-			//viewPos.setX(x);
-			//viewPos.setY(y);
+			viewPos.setX(x);
+			viewPos.setY(y);
 
 			Point dir(x, y, 0);
 			dir = dir - viewPos;
 			dir.norm();
-			Point curColor = raytracer->traceRay(viewPos, dir, 0);
+			Point curColor = raytracer.traceRay(viewPos, dir, depth);
 
 			QColor q_color(curColor.getX(), curColor.getY(), curColor.getZ());
 
+			_mutex.lock();
 			drawPoint(q_color, x, y);
+			_mutex.unlock();
 		}
 	}
 }
+
+void Renderer::renderZBuffer(Scene &scene)
+{
+	auto zbuf = new zBuffer(&scene);
+
+	zbuf->render(_painter);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

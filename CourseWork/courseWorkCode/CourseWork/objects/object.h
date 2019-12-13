@@ -6,6 +6,7 @@
 #include "../math/mesh.h"
 #include <vector>
 #include <memory>
+#include <iostream>
 
 class Object
 {
@@ -32,6 +33,9 @@ public:
 
 	virtual double getGlossCoef() const = 0;
 	virtual void setGlossCoef(double value) = 0;
+
+	virtual void setName(std::string) = 0;
+	virtual std::string getName() const = 0;
 protected:
 	Point _center;
     Point _color;
@@ -41,6 +45,7 @@ protected:
 	double _reflectionCoef;
 	double _dispertionCoef;
 	double _glossCoef;
+	std::string _name;
 };
 
 #endif // OBJECT_H

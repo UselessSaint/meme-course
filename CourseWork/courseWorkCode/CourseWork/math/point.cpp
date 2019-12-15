@@ -82,9 +82,18 @@ void Point::norm()
     double vecLen = getX()*getX() + getY()*getY() + getZ()*getZ();
     vecLen = sqrt(vecLen);
 
-    setX(getX()/vecLen);
-    setY(getY()/vecLen);
-    setZ(getZ()/vecLen);
+	if (vecLen != 0.0)
+	{
+		setX(getX()/vecLen);
+		setY(getY()/vecLen);
+		setZ(getZ()/vecLen);
+	}
+	else
+	{
+		setX(0);
+		setY(0);
+		setZ(0);
+	}
 }
 
 Point Point::sign()
@@ -128,6 +137,15 @@ Point Point::operator*(const double &other)
 	Point res(getX()*other,
 			  getY()*other,
 			  getZ()*other);
+
+	return res;
+}
+
+Point Point::operator/(const double &other)
+{
+	Point res(getX()/other,
+			  getY()/other,
+			  getZ()/other);
 
 	return res;
 }

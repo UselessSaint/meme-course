@@ -30,6 +30,7 @@ public:
 	Point operator- (const Point&);
 	Point operator+ (const Point&);
 	Point operator* (const double&);
+	Point operator/ (const double&);
 	bool operator== (const Point&);
 	bool operator!= (const Point&);
 private:

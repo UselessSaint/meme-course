@@ -27,6 +27,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QFrame *frame;
     QVBoxLayout *verticalLayout;
+    QPushButton *pushButton_2;
     QPushButton *pushButton;
 
     void setupUi(QMainWindow *MainWindow)
@@ -53,9 +54,13 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        pushButton_2 = new QPushButton(frame);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        verticalLayout->addWidget(pushButton_2);
+
         pushButton = new QPushButton(frame);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setMaximumSize(QSize(300, 800));
 
         verticalLayout->addWidget(pushButton);
 
@@ -72,7 +77,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Z", nullptr));
+        pushButton->setText(QApplication::translate("MainWindow", "TR", nullptr));
     } // retranslateUi
 
 };

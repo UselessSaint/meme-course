@@ -11,11 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,9 +22,6 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
-    QFrame *frame;
-    QVBoxLayout *verticalLayout;
-    QPushButton *pushButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -43,25 +37,6 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        frame = new QFrame(centralWidget);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setMaximumSize(QSize(300, 800));
-        frame->setSizeIncrement(QSize(300, 500));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
-        verticalLayout = new QVBoxLayout(frame);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        pushButton = new QPushButton(frame);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setMaximumSize(QSize(300, 800));
-
-        verticalLayout->addWidget(pushButton);
-
-
-        horizontalLayout->addWidget(frame);
-
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -72,7 +47,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
     } // retranslateUi
 
 };

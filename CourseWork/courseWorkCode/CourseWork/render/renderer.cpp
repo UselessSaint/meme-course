@@ -70,11 +70,12 @@ void Renderer::raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEd
 	}
 }
 
-void Renderer::renderZBuffer(Scene &scene)
+void Renderer::renderZBuffer(Scene &scene, bool fl)
 {
 	auto zbuf = new zBuffer(&scene);
 
-	zbuf->render(_painter);
+	if (fl)
+		zbuf->renderGouraud(_painter);
 }
 
 

@@ -10,7 +10,7 @@ void zBuffer::drawPoint(QPainter *painter, QColor &color, int x, int y)
 	painter->drawPoint(w + x , h - y);
 }
 
-void zBuffer::render(QPainter *painter)
+void zBuffer::renderGouraud(QPainter *painter)
 {
 	auto sceneObjs = _scene->getObjects();
 
@@ -47,22 +47,40 @@ void zBuffer::render(QPainter *painter)
 			Point cur1 = verts[0];
 			Point cur2 = verts[0];
 
+			Point nv0 = findNormalToPoint(verts[0], *obj);
+			Point nv1 = findNormalToPoint(verts[1], *obj);
+			Point nv2 = findNormalToPoint(verts[2], *obj);
+
+			Point objColor = obj->getColor();
+
+			Point v0Color = calcLight(verts[0], nv0, objColor, *obj);
+			Point v1Color = calcLight(verts[1], nv1, objColor, *obj);
+			Point v2Color = calcLight(verts[2], nv2, objColor, *obj);
+
+			Point cv1 = v1Color - v0Color;
+			Point cv2 = v2Color - v0Color;
+
+			cv1 = cv1/(verts[1] - verts[0]).len();
+			cv2 = cv2/(verts[2] - verts[0]).len();
+
+			Point curC1 = v0Color;
+			Point curC2 = v0Color;
+
 			while (1)
 			{
 				Point mvec = cur2 - cur1;
 				mvec.norm();
 				Point curm = cur1;
 
+				Point mvecol = curC2 - curC1;
+				mvecol = mvecol / (cur2 - cur1).len();
+				Point curCol = curC1;
+
 				if (!((cur1-verts[0]).len() < (verts[0] - verts[1]).len()) &&
 					!((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
 					break;
 
-				if (((cur1-verts[0]).len() < (verts[0] - verts[1]).len()))
-					cur1 = cur1 + v1;
-				if (((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
-					cur2 = cur2 + v2;
-
-				while ((curm - cur1).len() <= (cur1 - cur2).len())
+				while ((curm - cur1).len() < (cur1 - cur2).len())
 				{
 					int cx = int(round(curm.getX())),
 						cy = int(round(curm.getY()));
@@ -75,11 +93,24 @@ void zBuffer::render(QPainter *painter)
 						if (screenInfo[size_t(cx)][size_t(cy)].first > curm.getZ())
 						{
 							screenInfo[size_t(cx)][size_t(cy)].first = curm.getZ();
-							screenInfo[size_t(cx)][size_t(cy)].second = obj->getColor();
+							screenInfo[size_t(cx)][size_t(cy)].second = curCol;//obj->getColor();
 						}
 					}
 
 					curm = curm + mvec;
+					curCol = curCol + mvecol;
+				}
+
+
+				if (((cur1-verts[0]).len() < (verts[0] - verts[1]).len()))
+				{
+					cur1 = cur1 + v1;
+					curC1 = curC1 + cv1;
+				}
+				if (((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
+				{
+					cur2 = cur2 + v2;
+					curC2 = curC2 + cv2;
 				}
 			}
 		}
@@ -96,7 +127,156 @@ void zBuffer::render(QPainter *painter)
 	}
 }
 
+Point zBuffer::findNormalToPoint(Point &pt, Object &obj)
+{
+	Point n(0,0,0);
 
+	for (auto face : obj.getMesh()->getFaces())
+	{
+		for (auto facePt : face.getFaceVertices())
+		{
+			if (pt == facePt)
+			{
+				Point tmpN = face.getNormal();
+
+				Point vecToCenter = obj.getCenter() - pt;
+				vecToCenter.norm();
+
+				if ( (tmpN.getX() * vecToCenter.getX() >= 0) &&
+					 (tmpN.getY() * vecToCenter.getY() >= 0) &&
+					 (tmpN.getZ() * vecToCenter.getZ() >= 0))
+				{
+					tmpN.setX(tmpN.getX()*(-1));
+					tmpN.setY(tmpN.getY()*(-1));
+					tmpN.setZ(tmpN.getZ()*(-1));
+				}
+
+				//std::cout << tmpN.getX() << " " << tmpN.getY() << " " << tmpN.getY() << std::endl;
+
+				n = n + tmpN;
+			}
+		}
+	}
+
+	n.norm();
+
+	return n;
+}
+
+Point zBuffer::calcLight(Point &pt, Point &n, Point &objColor, const Object &curObj)
+{
+	auto sceneLights = _scene->getLights();
+
+	Point res(0, 0, 0);
+	Point view(round(pt.getX()), round(pt.getY()), -800);
+	double intens = 0.0;
+
+	Point vecToCenter = curObj.getCenter() - pt;
+	vecToCenter.norm();
+
+	if ( (n.getX() * vecToCenter.getX() >= 0) &&
+		 (n.getY() * vecToCenter.getY() >= 0) &&
+		 (n.getZ() * vecToCenter.getZ() >= 0))
+	{
+		n.setX(n.getX()*(-1));
+		n.setY(n.getY()*(-1));
+		n.setZ(n.getZ()*(-1));
+	}
+
+	for (auto lt : sceneLights)
+	{
+		Point dir = lt->getPos() - pt;
+		double lenBetween = dir.len();
+		dir.norm();
+
+		Point tmp = (pt-view);
+		tmp.norm();
+
+		Point reflRay1 = n*n.scalarMult(dir);
+		reflRay1 = reflRay1 * (-2.0);
+		reflRay1 = reflRay1 + dir;
+		reflRay1.norm();
+
+		pt = pt + n;
+
+		if (!isIntersecting(pt, dir))
+		{
+			double curLtIntent = lt->getIntens() / lenBetween;
+			intens += curObj.getDispertionCoef()*fabs(dir.scalarMult(n))*curLtIntent;
+			intens += curObj.getReflecitonCoef()*pow(fabs(tmp.scalarMult(reflRay1)), curObj.getGlossCoef())*curLtIntent;
+		}
+	}
+
+	intens += 0.2;
+
+	if (intens > 1)
+		intens = 1;
+	if (intens < 0)
+		intens = 0;
+
+	res.setX(objColor.getX()*intens);
+	res.setY(objColor.getY()*intens);
+	res.setZ(objColor.getZ()*intens);
+
+	return res;
+}
+
+bool zBuffer::isIntersecting(Point &start, Point &direction)
+{
+	auto sceneObjs = _scene->getObjects();
+
+	for (auto obj : sceneObjs)
+	{
+		auto curObjMesh = obj->getMesh();
+		auto curObjFaces = curObjMesh->getFaces();
+
+		for (auto face : curObjFaces)
+		{
+			auto verts = face.getFaceVertices();
+
+			Point v1 = verts[1] - verts[0];
+			Point v2 = verts[2] - verts[0];
+
+			Point n = v1.vecMult(v2);
+			n.norm();
+
+			double div = n.scalarMult(direction);
+			double t;
+
+			if (div != 0.0)
+			{
+				t = n.scalarMult(verts[0] - start)/div;
+			}
+			else
+				continue;
+
+			if (t < 0)
+				continue;
+
+			Point curPt(start.getX() + t*direction.getX(),
+						start.getY() + t*direction.getY(),
+						start.getZ() + t*direction.getZ());
+			Point vecs[3];
+
+			vecs[0] = (verts[1] - verts[0]).vecMult(curPt - verts[0]);
+			vecs[1] = (verts[2] - verts[1]).vecMult(curPt - verts[1]);
+			vecs[2] = (verts[0] - verts[2]).vecMult(curPt - verts[2]);
+
+			vecs[0] = vecs[0].sign();
+			vecs[1] = vecs[1].sign();
+			vecs[2] = vecs[2].sign();
+
+			if ( (vecs[0].getX()*vecs[1].getX()) >= 0 && (vecs[1].getX()*vecs[2].getX()) >= 0 && (vecs[2].getX()*vecs[0].getX()) >= 0 &&
+				 (vecs[0].getY()*vecs[1].getY()) >= 0 && (vecs[1].getY()*vecs[2].getY()) >= 0 && (vecs[2].getY()*vecs[0].getY()) >= 0 &&
+				 (vecs[0].getZ()*vecs[1].getZ()) >= 0 && (vecs[1].getZ()*vecs[2].getZ()) >= 0 && (vecs[2].getZ()*vecs[0].getZ()) >= 0 )
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
 
 
 

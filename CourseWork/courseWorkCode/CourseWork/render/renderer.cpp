@@ -21,7 +21,7 @@ void Renderer::renderRaytrace(Scene &scene, int depth)
     Point viewPos(0, 0, -800);
 
 	std::vector<std::thread> threads;
-	int amountOfThreads = 4;
+	int amountOfThreads = 32;
 
 	int deltaY = size.second / amountOfThreads;
 
@@ -70,12 +70,14 @@ void Renderer::raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEd
 	}
 }
 
-void Renderer::renderZBuffer(Scene &scene, bool fl)
+void Renderer::renderZBuffer(Scene *scene, bool fl)
 {
-	auto zbuf = new zBuffer(&scene);
+	auto zbuf = new zBuffer(scene);
 
 	if (fl)
 		zbuf->renderGouraud(_painter);
+	else
+		zbuf->renderPhong(_painter);
 }
 
 

@@ -30,11 +30,13 @@ private slots:
 
 	void on_pushButton_2_clicked();
 
+	void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
 	DrawLabel *_draw_label;
 	QPixmap _pixmap;
-	Renderer *_renderer;
+
 	Scene *_scene;
 };
 

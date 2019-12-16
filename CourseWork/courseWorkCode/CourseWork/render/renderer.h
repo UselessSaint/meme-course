@@ -20,7 +20,7 @@ public:
 	void drawPoint(QColor &color, int x, int y);
 
 	void renderRaytrace(Scene &scene, int depth);
-	void renderZBuffer(Scene &scene, bool fl);
+    void renderZBuffer(Scene *scene, bool fl);
 private:
 	QPainter *_painter;
 	std::mutex _mutex;

@@ -35,6 +35,8 @@ void zBuffer::renderGouraud(QPainter *painter)
 		auto curObjMesh = obj->getMesh();
 		auto curObjFaces = curObjMesh->getFaces();
 
+		Point objColor = obj->getColor();
+
 		for (auto face : curObjFaces)
 		{
 			auto verts = face.getFaceVertices();
@@ -51,7 +53,7 @@ void zBuffer::renderGouraud(QPainter *painter)
 			Point nv1 = findNormalToPoint(verts[1], *obj);
 			Point nv2 = findNormalToPoint(verts[2], *obj);
 
-			Point objColor = obj->getColor();
+
 
 			Point v0Color = calcLight(verts[0], nv0, objColor, *obj);
 			Point v1Color = calcLight(verts[1], nv1, objColor, *obj);
@@ -127,6 +129,107 @@ void zBuffer::renderGouraud(QPainter *painter)
 	}
 }
 
+void zBuffer::renderPhong(QPainter *painter)
+{
+	auto sceneObjs = _scene->getObjects();
+
+	Point bgColor(255, 255, 255);
+	std::vector<std::vector<std::pair<double, Point>>> screenInfo;
+
+	std::pair<int, int> size = {painter->window().width(), painter->window().height()};
+	std::pair<double, Point> info = {2000000, bgColor};
+
+	for (int i = 0; i < size.first; i++)
+	{
+		std::vector<std::pair<double, Point>> tmp;
+		for (int j = 0; j < size.second; j++)
+		{
+			tmp.push_back(info);
+		}
+		screenInfo.push_back(tmp);
+	}
+
+	for (auto obj : sceneObjs)
+	{
+		auto curObjMesh = obj->getMesh();
+		auto curObjFaces = curObjMesh->getFaces();
+
+		Point objColor = obj->getColor();
+
+		for (auto face : curObjFaces)
+		{
+			auto verts = face.getFaceVertices();
+
+			Point v1 = verts[1] - verts[0];
+			Point v2 = verts[2] - verts[0];
+			v1.norm();
+			v2.norm();
+
+			Point cur1 = verts[0];
+			Point cur2 = verts[0];
+
+			Point nv0 = findNormalToPoint(verts[0], *obj);
+			Point nv1 = findNormalToPoint(verts[1], *obj);
+			Point nv2 = findNormalToPoint(verts[2], *obj);
+
+			Point normToFace = nv0 + nv1 + nv2;
+			normToFace = normToFace / (nv0.len() + nv1.len() + nv2.len());
+			normToFace.norm();
+
+			while (1)
+			{
+				Point mvec = cur2 - cur1;
+				mvec.norm();
+				Point curm = cur1;
+
+				if (!((cur1-verts[0]).len() < (verts[0] - verts[1]).len()) &&
+					!((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
+					break;
+
+				while ((curm - cur1).len() < (cur1 - cur2).len())
+				{
+					int cx = int(round(curm.getX())),
+						cy = int(round(curm.getY()));
+
+					cx += size.first/2;
+					cy += size.second/2;
+
+					if (cx >= 0 && cx < size.first && cy >= 0 && cy < size.second)
+					{
+						if (screenInfo[size_t(cx)][size_t(cy)].first > curm.getZ())
+						{
+							screenInfo[size_t(cx)][size_t(cy)].first = curm.getZ();
+							screenInfo[size_t(cx)][size_t(cy)].second = calcLight(curm, normToFace, objColor, *obj);
+						}
+					}
+
+					curm = curm + mvec;
+				}
+
+
+				if (((cur1-verts[0]).len() < (verts[0] - verts[1]).len()))
+				{
+					cur1 = cur1 + v1;
+				}
+				if (((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
+				{
+					cur2 = cur2 + v2;
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < size.first; i++)
+	{
+		for (int j = 0; j < size.second; j++)
+		{
+			QColor q_color(screenInfo[i][j].second.getX(), screenInfo[i][j].second.getY(), screenInfo[i][j].second.getZ());
+
+			drawPoint(painter, q_color, i - size.first/2, j - size.second/2);
+		}
+	}
+}
+
 Point zBuffer::findNormalToPoint(Point &pt, Object &obj)
 {
 	Point n(0,0,0);
@@ -166,40 +269,37 @@ Point zBuffer::findNormalToPoint(Point &pt, Object &obj)
 Point zBuffer::calcLight(Point &pt, Point &n, Point &objColor, const Object &curObj)
 {
 	auto sceneLights = _scene->getLights();
+	Point pnt = pt;
 
 	Point res(0, 0, 0);
-	Point view(round(pt.getX()), round(pt.getY()), -800);
+
 	double intens = 0.0;
 
-	Point vecToCenter = curObj.getCenter() - pt;
+	Point vecToCenter = curObj.getCenter() - pnt;
 	vecToCenter.norm();
 
-	if ( (n.getX() * vecToCenter.getX() >= 0) &&
-		 (n.getY() * vecToCenter.getY() >= 0) &&
-		 (n.getZ() * vecToCenter.getZ() >= 0))
-	{
-		n.setX(n.getX()*(-1));
-		n.setY(n.getY()*(-1));
-		n.setZ(n.getZ()*(-1));
-	}
 
 	for (auto lt : sceneLights)
 	{
-		Point dir = lt->getPos() - pt;
+		Point dir = lt->getPos() - pnt;
 		double lenBetween = dir.len();
 		dir.norm();
-
-		Point tmp = (pt-view);
-		tmp.norm();
 
 		Point reflRay1 = n*n.scalarMult(dir);
 		reflRay1 = reflRay1 * (-2.0);
 		reflRay1 = reflRay1 + dir;
 		reflRay1.norm();
 
-		pt = pt + n;
 
-		if (!isIntersecting(pt, dir))
+
+		pnt = pnt + n;
+
+		Point view(pnt.getX(), pnt.getY(), -800);
+
+		Point tmp = (pnt-view);
+		tmp.norm();
+
+		if (!isIntersecting(pnt, dir))
 		{
 			double curLtIntent = lt->getIntens() / lenBetween;
 			intens += curObj.getDispertionCoef()*fabs(dir.scalarMult(n))*curLtIntent;

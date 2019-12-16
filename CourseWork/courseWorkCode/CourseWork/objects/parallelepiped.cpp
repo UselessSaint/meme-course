@@ -25,9 +25,9 @@ parallelepiped::parallelepiped(Point center, double width, double height, double
 
 	std::vector<Face> vf;
 
-	//vf.push_back(Face(vp[0], vp[1], vp[3]));
+	vf.push_back(Face(vp[0], vp[1], vp[3]));
 	vf.push_back(Face(vp[0], vp[3], vp[4]));
-	/*vf.push_back(Face(vp[0], vp[1], vp[4]));
+	vf.push_back(Face(vp[0], vp[1], vp[4]));
 
 	vf.push_back(Face(vp[5], vp[4], vp[1]));
 	vf.push_back(Face(vp[5], vp[4], vp[6]));
@@ -39,7 +39,7 @@ parallelepiped::parallelepiped(Point center, double width, double height, double
 
 	vf.push_back(Face(vp[7], vp[6], vp[3]));
 	vf.push_back(Face(vp[7], vp[3], vp[4]));
-	vf.push_back(Face(vp[7], vp[6], vp[4]));*/
+	vf.push_back(Face(vp[7], vp[6], vp[4]));
 
 	std::shared_ptr<Mesh> pNewMesh(new Mesh(vp, vf));
 	setMesh(pNewMesh);

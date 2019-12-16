@@ -18,6 +18,7 @@ public:
 	zBuffer(Scene *scene);
 
 	void renderGouraud(QPainter *painter);
+	void renderPhong(QPainter *painter);
 	void drawPoint(QPainter *painter, QColor &color, int x, int y);
 private:
 	Scene *_scene;

@@ -17,11 +17,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	_scene = new Scene();
 
-	auto sph = new Sphere(Point(-100, 0, 300), 200);
+	auto sph = new Sphere(Point(-100, 100, 300), 200);
 	sph->setColor(Point(0,255,255));
 	sph->setReflecitonCoef(0);
 	std::shared_ptr<Object> psph(sph);
-	_scene->addObject(psph);
+	//_scene->addObject(psph);
 
 	auto sph2 = new Sphere(Point(50, 0, 400), 200);
 	sph2->setColor(Point(255,0,0));
@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	std::shared_ptr<Object> psph2(sph2);
 	//_scene->addObject(psph2);
 
-	auto par1 = new parallelepiped(Point(0,15,700), 500, 500, 20);
+	auto par1 = new parallelepiped(Point(0,105,700), 500, 500, 20);
 	par1->setColor(Point(255, 255, 0));
 	par1->setReflecitonCoef(1);
 	std::shared_ptr<Object> ppar1(par1);
@@ -50,9 +50,14 @@ MainWindow::MainWindow(QWidget *parent) :
 	std::shared_ptr<Object> psph5(sph5);
 	//_scene->addObject(psph5);
 
-	auto newLt = new Light(Point(-200, 0, -250), 800);
+	auto newLt = new Light(Point(0, 0, -250), 300);
 	std::shared_ptr<Light> pnewLt(newLt);
 	_scene->addLight(pnewLt);
+
+
+	auto newLt2 = new Light(Point(0, 200, -250), 300);
+	std::shared_ptr<Light> pnewLt2(newLt2);
+	_scene->addLight(pnewLt2);
 }
 
 MainWindow::~MainWindow()

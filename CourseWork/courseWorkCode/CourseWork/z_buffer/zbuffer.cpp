@@ -53,8 +53,6 @@ void zBuffer::renderGouraud(QPainter *painter)
 			Point nv1 = findNormalToPoint(verts[1], *obj);
 			Point nv2 = findNormalToPoint(verts[2], *obj);
 
-
-
 			Point v0Color = calcLight(verts[0], nv0, objColor, *obj);
 			Point v1Color = calcLight(verts[1], nv1, objColor, *obj);
 			Point v2Color = calcLight(verts[2], nv2, objColor, *obj);
@@ -78,8 +76,8 @@ void zBuffer::renderGouraud(QPainter *painter)
 				mvecol = mvecol / (cur2 - cur1).len();
 				Point curCol = curC1;
 
-				if (!((cur1-verts[0]).len() < (verts[0] - verts[1]).len()) &&
-					!((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
+				if (!((cur1-verts[0]).len() <= (verts[0] - verts[1]).len()) &&
+					!((cur2-verts[0]).len() <= (verts[0] - verts[2]).len()))
 					break;
 
 				while ((curm - cur1).len() < (cur1 - cur2).len())
@@ -95,7 +93,7 @@ void zBuffer::renderGouraud(QPainter *painter)
 						if (screenInfo[size_t(cx)][size_t(cy)].first > curm.getZ())
 						{
 							screenInfo[size_t(cx)][size_t(cy)].first = curm.getZ();
-							screenInfo[size_t(cx)][size_t(cy)].second = curCol;//obj->getColor();
+							screenInfo[size_t(cx)][size_t(cy)].second = curCol;
 						}
 					}
 
@@ -104,12 +102,12 @@ void zBuffer::renderGouraud(QPainter *painter)
 				}
 
 
-				if (((cur1-verts[0]).len() < (verts[0] - verts[1]).len()))
+				if (((cur1-verts[0]).len() <= (verts[0] - verts[1]).len()))
 				{
 					cur1 = cur1 + v1;
 					curC1 = curC1 + cv1;
 				}
-				if (((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
+				if (((cur2-verts[0]).len() <= (verts[0] - verts[2]).len()))
 				{
 					cur2 = cur2 + v2;
 					curC2 = curC2 + cv2;
@@ -174,7 +172,23 @@ void zBuffer::renderPhong(QPainter *painter)
 
 			Point normToFace = nv0 + nv1 + nv2;
 			normToFace = normToFace / (nv0.len() + nv1.len() + nv2.len());
-			normToFace.norm();
+			hnormToFace.norm();
+
+			Point tmpN = face.getNormal();
+
+			Point vecToCenter = obj->getCenter() - verts[0];
+			vecToCenter.norm();
+
+			if ( (tmpN.getX() * vecToCenter.getX() >= 0) &&
+				 (tmpN.getY() * vecToCenter.getY() >= 0) &&
+				 (tmpN.getZ() * vecToCenter.getZ() >= 0))
+			{
+				tmpN.setX(tmpN.getX()*(-1));
+				tmpN.setY(tmpN.getY()*(-1));
+				tmpN.setZ(tmpN.getZ()*(-1));
+			}
+
+			normToFace = tmpN;
 
 			while (1)
 			{
@@ -182,8 +196,8 @@ void zBuffer::renderPhong(QPainter *painter)
 				mvec.norm();
 				Point curm = cur1;
 
-				if (!((cur1-verts[0]).len() < (verts[0] - verts[1]).len()) &&
-					!((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
+				if (!((cur1-verts[0]).len() <= (verts[0] - verts[1]).len()) &&
+					!((cur2-verts[0]).len() <= (verts[0] - verts[2]).len()))
 					break;
 
 				while ((curm - cur1).len() < (cur1 - cur2).len())
@@ -207,11 +221,11 @@ void zBuffer::renderPhong(QPainter *painter)
 				}
 
 
-				if (((cur1-verts[0]).len() < (verts[0] - verts[1]).len()))
+				if (((cur1-verts[0]).len() <= (verts[0] - verts[1]).len()))
 				{
 					cur1 = cur1 + v1;
 				}
-				if (((cur2-verts[0]).len() < (verts[0] - verts[2]).len()))
+				if (((cur2-verts[0]).len() <= (verts[0] - verts[2]).len()))
 				{
 					cur2 = cur2 + v2;
 				}
@@ -254,14 +268,12 @@ Point zBuffer::findNormalToPoint(Point &pt, Object &obj)
 					tmpN.setZ(tmpN.getZ()*(-1));
 				}
 
-				//std::cout << tmpN.getX() << " " << tmpN.getY() << " " << tmpN.getY() << std::endl;
-
 				n = n + tmpN;
 			}
 		}
 	}
 
-	n.norm();
+	//n.norm();
 
 	return n;
 }
@@ -289,8 +301,6 @@ Point zBuffer::calcLight(Point &pt, Point &n, Point &objColor, const Object &cur
 		reflRay1 = reflRay1 * (-2.0);
 		reflRay1 = reflRay1 + dir;
 		reflRay1.norm();
-
-
 
 		pnt = pnt + n;
 

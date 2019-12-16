@@ -34,6 +34,8 @@ Sphere::Sphere(Point center, double radius)
 
 	std::vector<Face> vecFs;
 
+	//посмотреть построение UW сферы
+
 	vecFs.push_back(Face(vecPt[0], vecPt[11], vecPt[5]));
 	vecFs.push_back(Face(vecPt[0], vecPt[5], vecPt[1]));
 	vecFs.push_back(Face(vecPt[0], vecPt[1], vecPt[7]));

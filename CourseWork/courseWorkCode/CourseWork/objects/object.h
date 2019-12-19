@@ -36,6 +36,8 @@ public:
 
 	virtual void setName(std::string) = 0;
 	virtual std::string getName() const = 0;
+
+	virtual void rotate(double xAgnle, double yAngle, double zAngle);
 protected:
 	Point _center;
     Point _color;

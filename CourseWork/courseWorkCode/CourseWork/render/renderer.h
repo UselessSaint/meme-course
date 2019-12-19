@@ -19,13 +19,13 @@ public:
 	std::pair<int, int> getSize();
 	void drawPoint(QColor &color, int x, int y);
 
-	void renderRaytrace(Scene &scene, int depth);
+	void renderRaytrace(Scene &scene, int depth, bool pflag, int thrd);
     void renderZBuffer(Scene *scene, bool fl);
 private:
 	QPainter *_painter;
 	std::mutex _mutex;
 
-	void raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEdges, Point viewPos, int depth);
+	void raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEdges, Point viewPos, int depth, bool pflag);
 };
 
 #endif // RENDERER_H

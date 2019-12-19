@@ -36,6 +36,8 @@ public:
 
 	void setName(std::string) override;
 	std::string getName() const override;
+
+	void rotate(double xAgnle, double yAngle, double zAngle) override;
 };
 
 #endif // SPHERE_H

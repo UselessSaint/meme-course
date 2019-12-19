@@ -37,7 +37,7 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 
             if (div != 0.0)
 			{
-                t = n.scalarMult(verts[0] - start)/div;
+				t = n.scalarMult(verts[0] - start)/div;
 			}
             else
                 continue;
@@ -63,9 +63,9 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 
 			Point vecs[3];
 
-            vecs[0] = (verts[1] - verts[0]).vecMult(curPt - verts[0]);
-            vecs[1] = (verts[2] - verts[1]).vecMult(curPt - verts[1]);
-            vecs[2] = (verts[0] - verts[2]).vecMult(curPt - verts[2]);
+			vecs[0] = (verts[1] - verts[0]).vecMult(curPt - verts[0]);
+			vecs[1] = (verts[2] - verts[1]).vecMult(curPt - verts[1]);
+			vecs[2] = (verts[0] - verts[2]).vecMult(curPt - verts[2]);
 
 			vecs[0] = vecs[0].sign();
 			vecs[1] = vecs[1].sign();
@@ -119,6 +119,8 @@ Point RayTrace::calcLight(Point &start, Point &objColor, Point &n, Point &view, 
 {
 	auto sceneLights = _scene->getLights();
 
+	Point pnt2 = start;
+
 	Point res(0, 0, 0);
 	double intens = 0.0;
 
@@ -130,6 +132,20 @@ Point RayTrace::calcLight(Point &start, Point &objColor, Point &n, Point &view, 
 
 		Point tmp = (start-view);
 		tmp.norm();
+
+		Point vecToCenter = curObj.getCenter() - pnt2;
+		vecToCenter.norm();
+
+		if ( (n.getX() * vecToCenter.getX() >= 0) &&
+			 (n.getY() * vecToCenter.getY() >= 0) &&
+			 (n.getZ() * vecToCenter.getZ() >= 0))
+		{
+			n.setX(n.getX()*(-1));
+			n.setY(n.getY()*(-1));
+			n.setZ(n.getZ()*(-1));
+		}
+
+		start = start + n;
 
 		Point reflRay1 = n*n.scalarMult(dir);
 		reflRay1 = reflRay1 * (-2.0);
@@ -174,8 +190,22 @@ bool RayTrace::isIntersecting(Point &start, Point &direction)
 			Point v1 = verts[1] - verts[0];
 			Point v2 = verts[2] - verts[0];
 
-			Point n = v1.vecMult(v2);
-			n.norm();
+			//Point n = v1.vecMult(v2);
+			//n.norm();
+
+			Point n = face.getNormal();
+
+			Point vecToCenter = obj->getCenter() - verts[0];
+			vecToCenter.norm();
+
+			if ( (n.getX() * vecToCenter.getX() >= 0) &&
+				 (n.getY() * vecToCenter.getY() >= 0) &&
+				 (n.getZ() * vecToCenter.getZ() >= 0))
+			{
+				n.setX(n.getX()*(-1));
+				n.setY(n.getY()*(-1));
+				n.setZ(n.getZ()*(-1));
+			}
 
 			double div = n.scalarMult(direction);
 			double t;

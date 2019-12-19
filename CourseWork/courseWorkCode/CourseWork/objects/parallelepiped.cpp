@@ -41,8 +41,12 @@ parallelepiped::parallelepiped(Point center, double width, double height, double
 	vf.push_back(Face(vp[7], vp[3], vp[4]));
 	vf.push_back(Face(vp[7], vp[6], vp[4]));
 
-	std::shared_ptr<Mesh> pNewMesh(new Mesh(vp, vf));
+	Mesh *newMesh = new Mesh(vp, vf);
+
+	std::shared_ptr<Mesh> pNewMesh(newMesh);//(new Mesh(vp, vf));
 	setMesh(pNewMesh);
+
+	auto t = getMesh();
 
 	setRadius((center - vp[0]).len());
 }
@@ -70,3 +74,115 @@ void parallelepiped::setCenter(Point value) { _center = value; }
 
 void parallelepiped::setName(std::string name) { _name = name; };
 std::string parallelepiped::getName() const { return _name; };
+
+void Object::rotate(double xAgnle, double yAngle, double zAngle) {};
+
+void parallelepiped::rotate(double xAngle, double yAngle, double zAngle)
+{
+	const double PI = 3.141592653589793238463;
+
+	double sinX = sin(xAngle * PI / 180);
+	double cosX = cos(xAngle * PI / 180);
+
+	double sinY = sin(yAngle * PI / 180);
+	double cosY = cos(yAngle * PI / 180);
+
+	double sinZ = sin(zAngle * PI / 180);
+	double cosZ = cos(zAngle * PI / 180);
+
+	auto pts = _mesh->getVertices();
+
+	for(size_t i = 0; i < pts.size(); i++)
+	{
+		Point tmp = pts[i];
+		double tmpX, tmpY, tmpZ;
+		tmp = tmp - getCenter();
+
+		if (xAngle != 0.0)
+		{
+			tmpX = tmp.getX();
+			tmpY = tmp.getY()*cosX - tmp.getZ()*sinX;
+			tmpZ = tmp.getY()*sinX + tmp.getZ()*cosX;
+			tmp.setX( tmpX );
+			tmp.setY( tmpY );
+			tmp.setZ( tmpZ );
+		}
+
+		if (yAngle != 0.0)
+		{
+			tmpX = tmp.getX()*cosY + tmp.getZ()*sinY;
+			tmpY = tmp.getY();
+			tmpZ = -tmp.getX()*sinY + tmp.getZ()*cosY;
+			tmp.setX( tmpX );
+			tmp.setY( tmpY );
+			tmp.setZ( tmpZ );
+		}
+
+		if (zAngle != 0.0)
+		{
+			tmpX = tmp.getX()*cosZ - tmp.getY()*sinZ;
+			tmpY = tmp.getX()*sinZ + tmp.getY()*cosZ;
+			tmpZ = tmp.getZ();
+			tmp.setX( tmpX );
+			tmp.setY( tmpY );
+			tmp.setZ( tmpZ );
+		}
+
+		tmp = tmp + getCenter();
+
+		_mesh->setVertice(i, tmp);
+	}
+
+	auto vp = _mesh->getVertices();
+
+	Face a(vp[0], vp[1], vp[3]);
+	_mesh->setFace(0, a);
+	a = Face(vp[0], vp[3], vp[4]);
+	_mesh->setFace(1, a);
+	a = Face(vp[0], vp[1], vp[4]);
+	_mesh->setFace(2, a);
+
+	a = Face(vp[5], vp[4], vp[1]);
+	_mesh->setFace(3, a);
+	a = Face(vp[5], vp[4], vp[6]);
+	_mesh->setFace(4, a);
+	a = Face(vp[5], vp[1], vp[6]);
+	_mesh->setFace(5, a);
+
+	a = Face(vp[2], vp[1], vp[6]);
+	_mesh->setFace(6, a);
+	a = Face(vp[2], vp[3], vp[1]);
+	_mesh->setFace(7, a);
+	a = Face(vp[2], vp[6], vp[3]);
+	_mesh->setFace(8, a);
+
+	a = Face(vp[7], vp[6], vp[3]);
+	_mesh->setFace(9, a);
+	a = Face(vp[7], vp[3], vp[4]);
+	_mesh->setFace(10, a);
+	a = Face(vp[7], vp[6], vp[4]);
+	_mesh->setFace(11, a);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

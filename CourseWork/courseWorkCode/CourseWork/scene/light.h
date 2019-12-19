@@ -16,9 +16,14 @@ public:
 	Point getPos();
 	double getIntens();
 
+	std::string getName();
+	void setName(std::string);
+
 private:
 	Point _position;
 	double _intens;
+
+	std::string _name;
 };
 
 #endif // LIGHT_H

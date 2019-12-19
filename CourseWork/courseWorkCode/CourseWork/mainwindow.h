@@ -5,6 +5,7 @@
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QWidget>
+#include <QString>
 #include "drawlabel.h"
 #include <iostream>
 #include "render/renderer.h"
@@ -28,14 +29,21 @@ public:
 private slots:
 	void on_pushButton_clicked();
 
-	void on_pushButton_2_clicked();
+	void on_pushButton_4_clicked();
 
-	void on_pushButton_3_clicked();
+	void on_pushButton_5_clicked();
+
+	void on_pushButton_6_clicked();
+
+	void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
 	DrawLabel *_draw_label;
 	QPixmap _pixmap;
+
+	int _cur_max_obj_id;
+	int _cur_max_lt;
 
 	Scene *_scene;
 };

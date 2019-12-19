@@ -80,7 +80,7 @@ void zBuffer::renderGouraud(QPainter *painter)
 					!((cur2-verts[0]).len() <= (verts[0] - verts[2]).len()))
 					break;
 
-				while ((curm - cur1).len() < (cur1 - cur2).len())
+				while ((curm - cur1).len() <= (cur1 - cur2).len())
 				{
 					int cx = int(round(curm.getX())),
 						cy = int(round(curm.getY()));
@@ -96,7 +96,8 @@ void zBuffer::renderGouraud(QPainter *painter)
 							screenInfo[size_t(cx)][size_t(cy)].second = curCol;
 						}
 					}
-
+					if (mvec.getX() == 0 && mvec.getY() == 0 && mvec.getZ() == 0)
+						break;
 					curm = curm + mvec;
 					curCol = curCol + mvecol;
 				}
@@ -170,25 +171,22 @@ void zBuffer::renderPhong(QPainter *painter)
 			Point nv1 = findNormalToPoint(verts[1], *obj);
 			Point nv2 = findNormalToPoint(verts[2], *obj);
 
-			Point normToFace = nv0 + nv1 + nv2;
-			normToFace = normToFace / (nv0.len() + nv1.len() + nv2.len());
-			hnormToFace.norm();
-
-			Point tmpN = face.getNormal();
+			Point n = face.getNormal();
 
 			Point vecToCenter = obj->getCenter() - verts[0];
 			vecToCenter.norm();
 
-			if ( (tmpN.getX() * vecToCenter.getX() >= 0) &&
-				 (tmpN.getY() * vecToCenter.getY() >= 0) &&
-				 (tmpN.getZ() * vecToCenter.getZ() >= 0))
+			if ( (n.getX() * vecToCenter.getX() >= 0) &&
+				 (n.getY() * vecToCenter.getY() >= 0) &&
+				 (n.getZ() * vecToCenter.getZ() >= 0))
 			{
-				tmpN.setX(tmpN.getX()*(-1));
-				tmpN.setY(tmpN.getY()*(-1));
-				tmpN.setZ(tmpN.getZ()*(-1));
+				n.setX(n.getX()*(-1));
+				n.setY(n.getY()*(-1));
+				n.setZ(n.getZ()*(-1));
 			}
-
-			normToFace = tmpN;
+/*
+			n = nv0 + nv1 + nv2;
+			n.norm();*/
 
 			while (1)
 			{
@@ -200,7 +198,7 @@ void zBuffer::renderPhong(QPainter *painter)
 					!((cur2-verts[0]).len() <= (verts[0] - verts[2]).len()))
 					break;
 
-				while ((curm - cur1).len() < (cur1 - cur2).len())
+				while ((curm - cur1).len() <= (cur1 - cur2).len())
 				{
 					int cx = int(round(curm.getX())),
 						cy = int(round(curm.getY()));
@@ -213,10 +211,11 @@ void zBuffer::renderPhong(QPainter *painter)
 						if (screenInfo[size_t(cx)][size_t(cy)].first > curm.getZ())
 						{
 							screenInfo[size_t(cx)][size_t(cy)].first = curm.getZ();
-							screenInfo[size_t(cx)][size_t(cy)].second = calcLight(curm, normToFace, objColor, *obj);
+							screenInfo[size_t(cx)][size_t(cy)].second = calcLight(curm, n, objColor, *obj);
 						}
 					}
-
+					if (mvec.getX() == 0 && mvec.getY() == 0 && mvec.getZ() == 0)
+						break;
 					curm = curm + mvec;
 				}
 
@@ -247,6 +246,7 @@ void zBuffer::renderPhong(QPainter *painter)
 Point zBuffer::findNormalToPoint(Point &pt, Object &obj)
 {
 	Point n(0,0,0);
+	int count = 0;
 
 	for (auto face : obj.getMesh()->getFaces())
 	{
@@ -269,11 +269,14 @@ Point zBuffer::findNormalToPoint(Point &pt, Object &obj)
 				}
 
 				n = n + tmpN;
+				count++;
 			}
 		}
 	}
 
-	//n.norm();
+	n = n/count;
+
+	n.norm();
 
 	return n;
 }
@@ -282,6 +285,7 @@ Point zBuffer::calcLight(Point &pt, Point &n, Point &objColor, const Object &cur
 {
 	auto sceneLights = _scene->getLights();
 	Point pnt = pt;
+	Point pnt2 = pt;
 
 	Point res(0, 0, 0);
 
@@ -301,6 +305,18 @@ Point zBuffer::calcLight(Point &pt, Point &n, Point &objColor, const Object &cur
 		reflRay1 = reflRay1 * (-2.0);
 		reflRay1 = reflRay1 + dir;
 		reflRay1.norm();
+
+		Point vecToCenter = curObj.getCenter() - pnt2;
+		vecToCenter.norm();
+
+		if ( (n.getX() * vecToCenter.getX() >= 0) &&
+			 (n.getY() * vecToCenter.getY() >= 0) &&
+			 (n.getZ() * vecToCenter.getZ() >= 0))
+		{
+			n.setX(n.getX()*(-1));
+			n.setY(n.getY()*(-1));
+			n.setZ(n.getZ()*(-1));
+		}
 
 		pnt = pnt + n;
 
@@ -347,8 +363,22 @@ bool zBuffer::isIntersecting(Point &start, Point &direction)
 			Point v1 = verts[1] - verts[0];
 			Point v2 = verts[2] - verts[0];
 
-			Point n = v1.vecMult(v2);
-			n.norm();
+			//Point n = v1.vecMult(v2);
+			//n.norm();
+
+			Point n = face.getNormal();
+
+			Point vecToCenter = obj->getCenter() - verts[0];
+			vecToCenter.norm();
+
+			if ( (n.getX() * vecToCenter.getX() >= 0) &&
+				 (n.getY() * vecToCenter.getY() >= 0) &&
+				 (n.getZ() * vecToCenter.getZ() >= 0))
+			{
+				n.setX(n.getX()*(-1));
+				n.setY(n.getY()*(-1));
+				n.setZ(n.getZ()*(-1));
+			}
 
 			double div = n.scalarMult(direction);
 			double t;

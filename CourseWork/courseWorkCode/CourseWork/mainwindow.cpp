@@ -17,67 +17,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	_scene = new Scene();
 
-	auto sph = new Sphere(Point(-100, 100, 300), 200);
-	sph->setColor(Point(0,255,255));
-	sph->setReflecitonCoef(0);
-	std::shared_ptr<Object> psph(sph);
-	//_scene->addObject(psph);
-
-	auto sph2 = new Sphere(Point(50, 0, 400), 200);
-	sph2->setColor(Point(255,0,0));
-	sph2->setReflecitonCoef(0);
-	std::shared_ptr<Object> psph2(sph2);
-	//_scene->addObject(psph2);
-
-	auto par1 = new parallelepiped(Point(0,105,700), 500, 500, 20);
-	par1->setColor(Point(255, 255, 0));
-	par1->setReflecitonCoef(1);
-	std::shared_ptr<Object> ppar1(par1);
-	_scene->addObject(ppar1);
-
-	auto sph3 = new Sphere(Point(-150, 0, 300), 200);
-	sph3->setColor(Point(255,255,255));
-	std::shared_ptr<Object> psph3(sph3);
-	//_scene->addObject(psph3);
-
-	auto sph4 = new Sphere(Point(50, 200, 300), 200);
-	sph4->setColor(Point(255,255,255));
-	std::shared_ptr<Object> psph4(sph4);
-	//_scene->addObject(psph4);
-
-	auto sph5 = new Sphere(Point(50, -200, 300), 200);
-	sph5->setColor(Point(255,255,255));
-	std::shared_ptr<Object> psph5(sph5);
-	//_scene->addObject(psph5);
-
-	auto newLt = new Light(Point(0, 0, -250), 300);
-	std::shared_ptr<Light> pnewLt(newLt);
-	_scene->addLight(pnewLt);
-
-
-	auto newLt2 = new Light(Point(0, 200, -250), 300);
-	std::shared_ptr<Light> pnewLt2(newLt2);
-	_scene->addLight(pnewLt2);
+	_cur_max_obj_id = 1;
+	_cur_max_lt = 1;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-	QPainter painter(&_pixmap);
-
-	auto _renderer = new Renderer(&painter);
-
-	clock_t st = clock();
-	_renderer->renderZBuffer(_scene, true);
-	_renderer->getSize();
-	clock_t end = clock();
-
-	std::cout << "(ZG) Time to render: " << static_cast<double>(end - st) / CLOCKS_PER_SEC << std::endl;
-	_draw_label->update();
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -86,25 +32,166 @@ void MainWindow::on_pushButton_clicked()
 
 	auto _renderer = new Renderer(&painter);
 
-	clock_t st = clock();
-	_renderer->renderRaytrace(*_scene, 1);
-	clock_t end = clock();
+	if (ui->rt->isChecked())
+	{
+		clock_t st = clock();
+		_renderer->renderRaytrace(*_scene, int(ui->rtDepth->value()), (ui->persp->isChecked() ? false : true), ui->thrd->value());
+		clock_t end = clock();
 
-	std::cout << "(RT) Time to render: " << static_cast<double>(end - st) / CLOCKS_PER_SEC << std::endl;
-	_draw_label->update();
+		std::cout << "(RT) Time to render: " << static_cast<double>(end - st) / CLOCKS_PER_SEC << std::endl;
+		_draw_label->update();
+	}
+	else if (ui->gourand->isChecked())
+	{
+		clock_t st = clock();
+		_renderer->renderZBuffer(_scene, true);
+		clock_t end = clock();
+
+		std::cout << "(ZG) Time to render: " << static_cast<double>(end - st) / CLOCKS_PER_SEC << std::endl;
+		_draw_label->update();
+	}
+	else if (ui->phong->isChecked())
+	{
+		clock_t st = clock();
+		_renderer->renderZBuffer(_scene, false);
+		clock_t end = clock();
+
+		std::cout << "(ZPH) Time to render: " << static_cast<double>(end - st) / CLOCKS_PER_SEC << std::endl;
+		_draw_label->update();
+	}
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_pushButton_4_clicked()
 {
-	QPainter painter(&_pixmap);
+	if (ui->tabWidget->currentIndex() == 0)
+	{
+		auto x = ui->icoX->text().toDouble();
+		auto y = ui->icoY->text().toDouble();
+		auto z = ui->icoZ->text().toDouble();
 
-	auto _renderer = new Renderer(&painter);
+		auto r = ui->red->value();
+		auto g = ui->green->value();
+		auto b = ui->blue->value();
 
-	clock_t st = clock();
-	_renderer->renderZBuffer(_scene, false);
-	_renderer->getSize();
-	clock_t end = clock();
+		auto disp = ui->dispertion->value();
+		auto ref = ui->reflection->value();
+		auto gloss = ui->gloss->text().toDouble();
+		auto rad = ui->radius->text().toDouble();
 
-	std::cout << "(ZPH) Time to render: " << static_cast<double>(end - st) / CLOCKS_PER_SEC << std::endl;
-	_draw_label->update();
+		auto newObj = new Sphere(Point(x, y, z), rad);
+		newObj->setColor(Point(r, g, b));
+		newObj->setGlossCoef(gloss);
+		newObj->setDispertionCoef(disp);
+		newObj->setReflecitonCoef(ref);
+		newObj->setName("icosahedron" + std::to_string(_cur_max_obj_id));
+
+		std::shared_ptr<Object> p_newObj(newObj);
+		_scene->addObject(p_newObj);
+
+		ui->comboBox->addItem("icosahedron" + QString::number(_cur_max_obj_id));
+
+		_cur_max_obj_id++;
+	}
+	else if (ui->tabWidget->currentIndex() == 1)
+	{
+		auto x = ui->cubeX->text().toDouble();
+		auto y = ui->cubeY->text().toDouble();
+		auto z = ui->cubeZ->text().toDouble();
+
+		auto r = ui->cubeRed->value();
+		auto g = ui->cubeGreen->value();
+		auto b = ui->cubeBlue->value();
+
+		auto disp = ui->cubeDisp->value();
+		auto ref = ui->cubeRef->value();
+		auto gloss = ui->cubeGloss->text().toDouble();
+
+		auto width = ui->width->text().toDouble();
+		auto height = ui->height->text().toDouble();
+		auto depth = ui->depth->text().toDouble();
+
+		auto newObj = new parallelepiped(Point(x, y, z), width, height, depth);
+		newObj->setColor(Point(r, g, b));
+		newObj->setGlossCoef(gloss);
+		newObj->setDispertionCoef(disp);
+		newObj->setReflecitonCoef(ref);
+		newObj->setName("parallelepiped" + std::to_string(_cur_max_obj_id));
+
+		std::shared_ptr<Object> p_newObj(newObj);
+		_scene->addObject(p_newObj);
+
+		ui->comboBox->addItem("parallelepiped" + QString::number(_cur_max_obj_id));
+
+		_cur_max_obj_id++;
+	}
+	else if (ui->tabWidget->currentIndex() == 3)
+	{
+		auto x = ui->ltX->text().toDouble();
+		auto y = ui->ltY->text().toDouble();
+		auto z = ui->ltZ->text().toDouble();
+
+		auto intens = ui->intens->text().toDouble();
+
+		auto newLt = new Light(Point(x, y, z), intens);
+		newLt->setName("light" + std::to_string(_cur_max_lt));
+
+
+		std::shared_ptr<Light> p_newLt(newLt);
+		_scene->addLight(p_newLt);
+
+		ui->comboBox_2->addItem("light" + QString::number(_cur_max_lt));
+
+		_cur_max_lt++;
+	}
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+	std::string name = ui->comboBox->currentText().toStdString();
+
+	auto objs = _scene->getObjects();
+
+	for (size_t i = 0; i < objs.size(); i++)
+	{
+		if (name == objs[i]->getName())
+		{
+			ui->comboBox->removeItem(ui->comboBox->currentIndex());
+			_scene->removeObject(int(i));
+		}
+	}
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+	std::string name = ui->comboBox_2->currentText().toStdString();
+
+	auto lts = _scene->getLights();
+
+	for (size_t i = 0; i < lts.size(); i++)
+	{
+		if (name == lts[i]->getName())
+		{
+			ui->comboBox_2->removeItem(ui->comboBox_2->currentIndex());
+			_scene->removeLight(int(i));
+		}
+	}
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+	auto rX = ui->rotX->text().toDouble();
+	auto rY = ui->rotY->text().toDouble();
+	auto rZ = ui->rotZ->text().toDouble();
+
+	std::string name = ui->comboBox->currentText().toStdString();
+
+	auto objs = _scene->getObjects();
+
+	for (size_t i = 0; i < objs.size(); i++)
+	{
+		if (name == objs[i]->getName())
+		{
+			objs[i]->rotate(rX, rY, rZ);
+		}
+	}
 }

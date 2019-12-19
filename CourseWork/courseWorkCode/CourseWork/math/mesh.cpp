@@ -11,6 +11,17 @@ std::vector<Point> Mesh::getVertices()
 
 std::vector<Face> Mesh::getFaces()
 {
-    return _faces;
+	return _faces;
 }
 
+void Mesh::setVertice(size_t i, Point &other)
+{
+	if (i < _vertices.size())
+		_vertices[i] = other;
+}
+
+void Mesh::setFace(size_t i, Face &other)
+{
+	if (i < _faces.size())
+		_faces[i] = other;
+}

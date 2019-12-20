@@ -1,0 +1,33 @@
+(ZG) Time to render: 0.259
+(ZPH) Time to render: 0.751
+(RT) Time to render: 5.155
+
+84 60000
+
+(ZG) Time to render: 0.25
+(ZPH) Time to render: 0.702
+(RT) Time to render: 4.609
+
+72 60000
+
+(ZG) Time to render: 0.247
+(ZPH) Time to render: 0.593
+(RT) Time to render: 3.793
+
+60 60000
+
+(ZG) Time to render: 0.242
+(ZPH) Time to render: 0.485
+(RT) Time to render: 3.095
+
+48 60000
+
+(ZPH) Time to render: 0.348
+(RT) Time to render: 1.675
+(ZG) Time to render: 0.245
+
+24 60000
+
+
+
+

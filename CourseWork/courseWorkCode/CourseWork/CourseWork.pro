@@ -33,6 +33,7 @@ SOURCES += \
         math/mesh.cpp \
         math/point.cpp \
     objects/parallelepiped.cpp \
+    objects/prism.cpp \
         objects/sphere.cpp \
     render/renderer.cpp \
     scene/light.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
         math/point.h \
         objects/object.h \
         objects/parallelepiped.h \
+        objects/prism.h \
         objects/sphere.h \
         render/renderer.h \
         scene/light.h \

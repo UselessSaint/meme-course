@@ -49,18 +49,6 @@ Point RayTrace::traceRay(Point &start, Point &direction, int depth)
 						start.getY() + t*direction.getY(),
                         start.getZ() + t*direction.getZ());
 
-			Point vecToCenter = obj->getCenter() - curPt;
-			vecToCenter.norm();
-
-			if ( (n.getX() * vecToCenter.getX() >= 0) &&
-				 (n.getY() * vecToCenter.getY() >= 0) &&
-				 (n.getZ() * vecToCenter.getZ() >= 0))
-			{
-				n.setX(n.getX()*(-1));
-				n.setY(n.getY()*(-1));
-				n.setZ(n.getZ()*(-1));
-			}
-
 			Point vecs[3];
 
 			vecs[0] = (verts[1] - verts[0]).vecMult(curPt - verts[0]);
@@ -133,18 +121,6 @@ Point RayTrace::calcLight(Point &start, Point &objColor, Point &n, Point &view, 
 		Point tmp = (start-view);
 		tmp.norm();
 
-		Point vecToCenter = curObj.getCenter() - pnt2;
-		vecToCenter.norm();
-
-		if ( (n.getX() * vecToCenter.getX() >= 0) &&
-			 (n.getY() * vecToCenter.getY() >= 0) &&
-			 (n.getZ() * vecToCenter.getZ() >= 0))
-		{
-			n.setX(n.getX()*(-1));
-			n.setY(n.getY()*(-1));
-			n.setZ(n.getZ()*(-1));
-		}
-
 		start = start + n;
 
 		Point reflRay1 = n*n.scalarMult(dir);
@@ -186,26 +162,14 @@ bool RayTrace::isIntersecting(Point &start, Point &direction)
 		for (auto face : curObjFaces)
 		{
 			auto verts = face.getFaceVertices();
-
+/*
 			Point v1 = verts[1] - verts[0];
-			Point v2 = verts[2] - verts[0];
+			Point v2 = verts[2] - verts[0];*/
 
 			//Point n = v1.vecMult(v2);
 			//n.norm();
 
 			Point n = face.getNormal();
-
-			Point vecToCenter = obj->getCenter() - verts[0];
-			vecToCenter.norm();
-
-			if ( (n.getX() * vecToCenter.getX() >= 0) &&
-				 (n.getY() * vecToCenter.getY() >= 0) &&
-				 (n.getZ() * vecToCenter.getZ() >= 0))
-			{
-				n.setX(n.getX()*(-1));
-				n.setY(n.getY()*(-1));
-				n.setZ(n.getZ()*(-1));
-			}
 
 			double div = n.scalarMult(direction);
 			double t;

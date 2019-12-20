@@ -99,7 +99,7 @@
           </size>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="icoTab">
           <attribute name="title">
@@ -167,6 +167,9 @@
              <property name="maximum">
               <number>255</number>
              </property>
+             <property name="value">
+              <number>110</number>
+             </property>
             </widget>
            </item>
            <item row="8" column="0" colspan="2">
@@ -188,12 +191,15 @@
              <property name="maximum">
               <number>255</number>
              </property>
+             <property name="value">
+              <number>10</number>
+             </property>
             </widget>
            </item>
            <item row="10" column="2">
             <widget class="QLineEdit" name="gloss">
              <property name="text">
-              <string>0</string>
+              <string>1000</string>
              </property>
             </widget>
            </item>
@@ -201,6 +207,9 @@
             <widget class="QSpinBox" name="green">
              <property name="maximum">
               <number>255</number>
+             </property>
+             <property name="value">
+              <number>40</number>
              </property>
             </widget>
            </item>
@@ -233,6 +242,9 @@
              <property name="singleStep">
               <double>0.100000000000000</double>
              </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="2" column="0">
@@ -250,6 +262,9 @@
              <property name="singleStep">
               <double>0.100000000000000</double>
              </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
             </widget>
            </item>
            <item row="4" column="2">
@@ -262,14 +277,14 @@
            <item row="2" column="2">
             <widget class="QLineEdit" name="icoZ">
              <property name="text">
-              <string>0</string>
+              <string>200</string>
              </property>
             </widget>
            </item>
            <item row="7" column="2">
             <widget class="QLineEdit" name="radius">
              <property name="text">
-              <string>0</string>
+              <string>100</string>
              </property>
             </widget>
            </item>
@@ -318,7 +333,7 @@
            <item row="2" column="2">
             <widget class="QLineEdit" name="cubeZ">
              <property name="text">
-              <string>0</string>
+              <string>200</string>
              </property>
             </widget>
            </item>
@@ -481,8 +496,210 @@
          </widget>
          <widget class="QWidget" name="tab">
           <attribute name="title">
-           <string>Страница</string>
+           <string>Треугольная призма</string>
           </attribute>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="2" column="0">
+            <widget class="QLineEdit" name="pX">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLabel" name="label_53">
+             <property name="text">
+              <string>G</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_54">
+             <property name="text">
+              <string>B</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_56">
+             <property name="text">
+              <string>Ширина</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="2">
+            <widget class="QDoubleSpinBox" name="pRef">
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="3">
+            <widget class="QLabel" name="label_51">
+             <property name="text">
+              <string>Цвет призмы:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLabel" name="label_55">
+             <property name="text">
+              <string>Высота</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLineEdit" name="pZ">
+             <property name="text">
+              <string>300</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="2">
+            <widget class="QDoubleSpinBox" name="pDisp">
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="pY">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_52">
+             <property name="text">
+              <string>R</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QSpinBox" name="pRed">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+             <property name="value">
+              <number>255</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_49">
+             <property name="text">
+              <string>Y</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_48">
+             <property name="text">
+              <string>X</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_47">
+             <property name="text">
+              <string>Центр призмы:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="2">
+            <widget class="QLineEdit" name="pGloss">
+             <property name="text">
+              <string>1000</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="label_50">
+             <property name="text">
+              <string>Z</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2">
+            <widget class="QLabel" name="label_57">
+             <property name="text">
+              <string>Глубина</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QSpinBox" name="pGreen">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QSpinBox" name="pBlue">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+             <property name="value">
+              <number>255</number>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QLineEdit" name="pHeight">
+             <property name="text">
+              <string>200</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLineEdit" name="pWidth">
+             <property name="text">
+              <string>200</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0" colspan="2">
+            <widget class="QLabel" name="label_58">
+             <property name="text">
+              <string>Коэф. диффузного освещения:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0" colspan="2">
+            <widget class="QLabel" name="label_59">
+             <property name="text">
+              <string>Коэф. зеркального освещения:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0" colspan="2">
+            <widget class="QLabel" name="label_60">
+             <property name="text">
+              <string>Коэф. блеска: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QLineEdit" name="pDepth">
+             <property name="text">
+              <string>200</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
          <widget class="QWidget" name="light">
           <attribute name="title">
@@ -590,7 +807,7 @@
            <item row="4" column="2">
             <widget class="QLineEdit" name="intens">
              <property name="text">
-              <string>100</string>
+              <string>200</string>
              </property>
             </widget>
            </item>
@@ -701,6 +918,32 @@
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
+          <item row="4" column="2">
+           <widget class="QSpinBox" name="thrd">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>8</number>
+            </property>
+            <property name="value">
+             <number>2</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="phong">
+            <property name="text">
+             <string>Z буффер + Фонг</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroup_2</string>
+            </attribute>
+           </widget>
+          </item>
           <item row="3" column="1">
            <widget class="QLabel" name="label_32">
             <property name="text">
@@ -715,20 +958,17 @@
             </property>
            </widget>
           </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="label_45">
+            <property name="text">
+             <string>/   Потоки</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QRadioButton" name="gourand">
             <property name="text">
              <string>Z буффер + Гуро</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroup_2</string>
-            </attribute>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QRadioButton" name="phong">
-            <property name="text">
-             <string>Z буффер + Фонг</string>
             </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroup_2</string>
@@ -740,42 +980,12 @@
             <property name="text">
              <string>Трассировка лучей</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroup_2</string>
             </attribute>
-           </widget>
-          </item>
-          <item row="5" column="1" colspan="2">
-           <widget class="QCheckBox" name="persp">
-            <property name="text">
-             <string>Перспектива</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-            <property name="tristate">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QSpinBox" name="thrd">
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>8</number>
-            </property>
-            <property name="value">
-             <number>2</number>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="label_45">
-            <property name="text">
-             <string>/   Потоки</string>
-            </property>
            </widget>
           </item>
          </layout>

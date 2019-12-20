@@ -41,12 +41,24 @@ parallelepiped::parallelepiped(Point center, double width, double height, double
 	vf.push_back(Face(vp[7], vp[3], vp[4]));
 	vf.push_back(Face(vp[7], vp[6], vp[4]));
 
+	for (size_t i = 0; i < vf.size(); i++)
+	{
+		Point n = vf[i].getNormal();
+		auto verts = vf[i].getFaceVertices();
+
+		Point vecToCenter = getCenter() - verts[0];
+		vecToCenter.norm();
+
+		if ( n.scalarMult(vecToCenter) >= 0 )
+		{
+			vf[i].changeNormalDir();
+		}
+	}
+
 	Mesh *newMesh = new Mesh(vp, vf);
 
 	std::shared_ptr<Mesh> pNewMesh(newMesh);//(new Mesh(vp, vf));
 	setMesh(pNewMesh);
-
-	auto t = getMesh();
 
 	setRadius((center - vp[0]).len());
 }
@@ -91,6 +103,7 @@ void parallelepiped::rotate(double xAngle, double yAngle, double zAngle)
 	double cosZ = cos(zAngle * PI / 180);
 
 	auto pts = _mesh->getVertices();
+	std::vector<Point> vp;
 
 	for(size_t i = 0; i < pts.size(); i++)
 	{
@@ -130,38 +143,45 @@ void parallelepiped::rotate(double xAngle, double yAngle, double zAngle)
 
 		tmp = tmp + getCenter();
 
-		_mesh->setVertice(i, tmp);
+		vp.push_back(tmp);
 	}
 
-	auto vp = _mesh->getVertices();
+	std::vector<Face> vf;
 
-	Face a(vp[0], vp[1], vp[3]);
-	_mesh->setFace(0, a);
-	a = Face(vp[0], vp[3], vp[4]);
-	_mesh->setFace(1, a);
-	a = Face(vp[0], vp[1], vp[4]);
-	_mesh->setFace(2, a);
+	vf.push_back(Face(vp[0], vp[1], vp[3]));
+	vf.push_back(Face(vp[0], vp[3], vp[4]));
+	vf.push_back(Face(vp[0], vp[1], vp[4]));
 
-	a = Face(vp[5], vp[4], vp[1]);
-	_mesh->setFace(3, a);
-	a = Face(vp[5], vp[4], vp[6]);
-	_mesh->setFace(4, a);
-	a = Face(vp[5], vp[1], vp[6]);
-	_mesh->setFace(5, a);
+	vf.push_back(Face(vp[5], vp[4], vp[1]));
+	vf.push_back(Face(vp[5], vp[4], vp[6]));
+	vf.push_back(Face(vp[5], vp[1], vp[6]));
 
-	a = Face(vp[2], vp[1], vp[6]);
-	_mesh->setFace(6, a);
-	a = Face(vp[2], vp[3], vp[1]);
-	_mesh->setFace(7, a);
-	a = Face(vp[2], vp[6], vp[3]);
-	_mesh->setFace(8, a);
+	vf.push_back(Face(vp[2], vp[1], vp[6]));
+	vf.push_back(Face(vp[2], vp[3], vp[1]));
+	vf.push_back(Face(vp[2], vp[6], vp[3]));
 
-	a = Face(vp[7], vp[6], vp[3]);
-	_mesh->setFace(9, a);
-	a = Face(vp[7], vp[3], vp[4]);
-	_mesh->setFace(10, a);
-	a = Face(vp[7], vp[6], vp[4]);
-	_mesh->setFace(11, a);
+	vf.push_back(Face(vp[7], vp[6], vp[3]));
+	vf.push_back(Face(vp[7], vp[3], vp[4]));
+	vf.push_back(Face(vp[7], vp[6], vp[4]));
+
+	for (size_t i = 0; i < vf.size(); i++)
+	{
+		Point n = vf[i].getNormal();
+		auto verts = vf[i].getFaceVertices();
+
+		Point vecToCenter = getCenter() - verts[0];
+		vecToCenter.norm();
+
+		if ( n.scalarMult(vecToCenter) >= 0 )
+		{
+			vf[i].changeNormalDir();
+		}
+	}
+
+	Mesh *newMesh = new Mesh(vp, vf);
+
+	std::shared_ptr<Mesh> pNewMesh(newMesh);//(new Mesh(vp, vf));
+	setMesh(pNewMesh);
 }
 
 

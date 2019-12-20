@@ -82,11 +82,11 @@ void zBuffer::renderGouraud(QPainter *painter)
 
 				while ((curm - cur1).len() <= (cur1 - cur2).len())
 				{
-					int cx = int(round(curm.getX())),
-						cy = int(round(curm.getY()));
+					double cx = size.first/2 + curm.getX()*800/(curm.getZ() + 800),
+						   cy = size.second/2 + curm.getY()*800/(curm.getZ() + 800);
 
-					cx += size.first/2;
-					cy += size.second/2;
+					cx = ceil(cx);
+					cy = ceil(cy);
 
 					if (cx >= 0 && cx < size.first && cy >= 0 && cy < size.second)
 					{
@@ -167,26 +167,7 @@ void zBuffer::renderPhong(QPainter *painter)
 			Point cur1 = verts[0];
 			Point cur2 = verts[0];
 
-			Point nv0 = findNormalToPoint(verts[0], *obj);
-			Point nv1 = findNormalToPoint(verts[1], *obj);
-			Point nv2 = findNormalToPoint(verts[2], *obj);
-
 			Point n = face.getNormal();
-
-			Point vecToCenter = obj->getCenter() - verts[0];
-			vecToCenter.norm();
-
-			if ( (n.getX() * vecToCenter.getX() >= 0) &&
-				 (n.getY() * vecToCenter.getY() >= 0) &&
-				 (n.getZ() * vecToCenter.getZ() >= 0))
-			{
-				n.setX(n.getX()*(-1));
-				n.setY(n.getY()*(-1));
-				n.setZ(n.getZ()*(-1));
-			}
-/*
-			n = nv0 + nv1 + nv2;
-			n.norm();*/
 
 			while (1)
 			{
@@ -200,11 +181,8 @@ void zBuffer::renderPhong(QPainter *painter)
 
 				while ((curm - cur1).len() <= (cur1 - cur2).len())
 				{
-					int cx = int(round(curm.getX())),
-						cy = int(round(curm.getY()));
-
-					cx += size.first/2;
-					cy += size.second/2;
+					double cx = size.first/2 + curm.getX()*800/(curm.getZ() + 800),
+						   cy = size.second/2 + curm.getY()*800/(curm.getZ() + 800);
 
 					if (cx >= 0 && cx < size.first && cy >= 0 && cy < size.second)
 					{
@@ -256,18 +234,6 @@ Point zBuffer::findNormalToPoint(Point &pt, Object &obj)
 			{
 				Point tmpN = face.getNormal();
 
-				Point vecToCenter = obj.getCenter() - pt;
-				vecToCenter.norm();
-
-				if ( (tmpN.getX() * vecToCenter.getX() >= 0) &&
-					 (tmpN.getY() * vecToCenter.getY() >= 0) &&
-					 (tmpN.getZ() * vecToCenter.getZ() >= 0))
-				{
-					tmpN.setX(tmpN.getX()*(-1));
-					tmpN.setY(tmpN.getY()*(-1));
-					tmpN.setZ(tmpN.getZ()*(-1));
-				}
-
 				n = n + tmpN;
 				count++;
 			}
@@ -294,7 +260,6 @@ Point zBuffer::calcLight(Point &pt, Point &n, Point &objColor, const Object &cur
 	Point vecToCenter = curObj.getCenter() - pnt;
 	vecToCenter.norm();
 
-
 	for (auto lt : sceneLights)
 	{
 		Point dir = lt->getPos() - pnt;
@@ -305,18 +270,6 @@ Point zBuffer::calcLight(Point &pt, Point &n, Point &objColor, const Object &cur
 		reflRay1 = reflRay1 * (-2.0);
 		reflRay1 = reflRay1 + dir;
 		reflRay1.norm();
-
-		Point vecToCenter = curObj.getCenter() - pnt2;
-		vecToCenter.norm();
-
-		if ( (n.getX() * vecToCenter.getX() >= 0) &&
-			 (n.getY() * vecToCenter.getY() >= 0) &&
-			 (n.getZ() * vecToCenter.getZ() >= 0))
-		{
-			n.setX(n.getX()*(-1));
-			n.setY(n.getY()*(-1));
-			n.setZ(n.getZ()*(-1));
-		}
 
 		pnt = pnt + n;
 
@@ -360,25 +313,7 @@ bool zBuffer::isIntersecting(Point &start, Point &direction)
 		{
 			auto verts = face.getFaceVertices();
 
-			Point v1 = verts[1] - verts[0];
-			Point v2 = verts[2] - verts[0];
-
-			//Point n = v1.vecMult(v2);
-			//n.norm();
-
 			Point n = face.getNormal();
-
-			Point vecToCenter = obj->getCenter() - verts[0];
-			vecToCenter.norm();
-
-			if ( (n.getX() * vecToCenter.getX() >= 0) &&
-				 (n.getY() * vecToCenter.getY() >= 0) &&
-				 (n.getZ() * vecToCenter.getZ() >= 0))
-			{
-				n.setX(n.getX()*(-1));
-				n.setY(n.getY()*(-1));
-				n.setZ(n.getZ()*(-1));
-			}
 
 			double div = n.scalarMult(direction);
 			double t;

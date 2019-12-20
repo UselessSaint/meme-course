@@ -6,6 +6,7 @@ debug/face.o
 debug/mesh.o
 debug/point.o
 debug/parallelepiped.o
+debug/prism.o
 debug/sphere.o
 debug/renderer.o
 debug/light.o

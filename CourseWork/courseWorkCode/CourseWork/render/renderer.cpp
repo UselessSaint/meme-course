@@ -13,7 +13,7 @@ std::pair<int, int> Renderer::getSize() {
 	return {_painter->window().width(), _painter->window().height()};
 }
 
-void Renderer::renderRaytrace(Scene &scene, int depth, bool pflag, int thrd)
+void Renderer::renderRaytrace(Scene &scene, int depth, int thrd)
 {
 	auto raytracer = new RayTrace(&scene);
 	auto size = getSize();
@@ -30,8 +30,8 @@ void Renderer::renderRaytrace(Scene &scene, int depth, bool pflag, int thrd)
 		std::pair<int, int> yEdges = {-size.second/2 + i*deltaY, -size.second/2 + (i+1)*deltaY};
 
 		std::thread thread(
-					[this](RayTrace rt, std::pair<int, int> yEdges, Point viewPos, int depth, bool pflag) { this->raytraceThreadRender(rt, yEdges, viewPos, depth, pflag); },
-		*raytracer, yEdges, viewPos, depth, pflag);
+					[this](RayTrace rt, std::pair<int, int> yEdges, Point viewPos, int depth) { this->raytraceThreadRender(rt, yEdges, viewPos, depth); },
+		*raytracer, yEdges, viewPos, depth);
 
 		threads.push_back(std::move(thread));
 	}
@@ -45,7 +45,7 @@ void Renderer::renderRaytrace(Scene &scene, int depth, bool pflag, int thrd)
 	}
 }
 
-void Renderer::raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEdges, Point viewPos, int depth, bool pflag)
+void Renderer::raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEdges, Point viewPos, int depth)
 {
 	auto size = getSize();
 
@@ -53,12 +53,6 @@ void Renderer::raytraceThreadRender(RayTrace &raytracer, std::pair<int, int> yEd
 	{
 		for (int y = yEdges.first; y < yEdges.second; y++)
 		{
-			if (pflag)
-			{
-				viewPos.setX(x);
-				viewPos.setY(y);
-			}
-
 			Point dir(x, y, 0);
 			dir = dir - viewPos;
 			dir.norm();

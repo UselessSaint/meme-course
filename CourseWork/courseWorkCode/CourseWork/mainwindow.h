@@ -12,7 +12,9 @@
 #include "objects/sphere.h"
 #include <time.h>
 #include "objects/parallelepiped.h"
+#include "objects/prism.h"
 #include "z_buffer/zbuffer.h"
+#include <QThread>
 
 namespace Ui {
 class MainWindow;

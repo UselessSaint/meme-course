@@ -671,12 +671,14 @@ public:
         phong = new QRadioButton(frame_5);
         buttonGroup_2->addButton(phong);
         phong->setObjectName(QString::fromUtf8("phong"));
+        phong->setChecked(false);
 
         gridLayout_8->addWidget(phong, 1, 0, 1, 1);
 
         rt = new QRadioButton(frame_5);
         buttonGroup_2->addButton(rt);
         rt->setObjectName(QString::fromUtf8("rt"));
+        rt->setChecked(true);
 
         gridLayout_8->addWidget(rt, 3, 0, 1, 1);
 
@@ -792,6 +794,9 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(light), QApplication::translate("MainWindow", "\320\230\321\201\321\202\320\276\321\207\320\275\320\270\320\272 \321\201\320\262\320\265\321\202\320\260", nullptr));
         label_43->setText(QApplication::translate("MainWindow", "\320\236\320\261\321\212\320\265\320\272\321\202\321\213 \321\201\321\206\320\265\320\275\321\213", nullptr));
         label_46->setText(QApplication::translate("MainWindow", "\320\243\320\263\320\273\321\213 (\320\263\321\200\320\260\320\264\321\203\321\201\321\213):", nullptr));
+        rotZ->setText(QApplication::translate("MainWindow", "0", nullptr));
+        rotY->setText(QApplication::translate("MainWindow", "0", nullptr));
+        rotX->setText(QApplication::translate("MainWindow", "0", nullptr));
         label_40->setText(QApplication::translate("MainWindow", "\320\222\320\276\320\272\321\200\321\203\320\263 Y", nullptr));
         label_41->setText(QApplication::translate("MainWindow", "\320\222\320\276\320\272\321\200\321\203\320\263 X", nullptr));
         label_42->setText(QApplication::translate("MainWindow", "\320\222\320\276\320\272\321\200\321\203\320\263 Z", nullptr));

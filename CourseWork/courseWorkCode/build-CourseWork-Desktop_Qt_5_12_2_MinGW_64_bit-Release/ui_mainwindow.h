@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
@@ -97,6 +96,33 @@ public:
     QDoubleSpinBox *cubeDisp;
     QDoubleSpinBox *cubeRef;
     QWidget *tab;
+    QGridLayout *gridLayout_9;
+    QLineEdit *pX;
+    QLabel *label_53;
+    QLabel *label_54;
+    QLabel *label_56;
+    QDoubleSpinBox *pRef;
+    QLabel *label_51;
+    QLabel *label_55;
+    QLineEdit *pZ;
+    QDoubleSpinBox *pDisp;
+    QLineEdit *pY;
+    QLabel *label_52;
+    QSpinBox *pRed;
+    QLabel *label_49;
+    QLabel *label_48;
+    QLabel *label_47;
+    QLineEdit *pGloss;
+    QLabel *label_50;
+    QLabel *label_57;
+    QSpinBox *pGreen;
+    QSpinBox *pBlue;
+    QLineEdit *pHeight;
+    QLineEdit *pWidth;
+    QLabel *label_58;
+    QLabel *label_59;
+    QLabel *label_60;
+    QLineEdit *pDepth;
     QWidget *light;
     QGridLayout *gridLayout_5;
     QLabel *label_28;
@@ -131,14 +157,13 @@ public:
     QPushButton *pushButton_5;
     QFrame *frame_5;
     QGridLayout *gridLayout_8;
+    QSpinBox *thrd;
+    QRadioButton *phong;
     QLabel *label_32;
     QSpinBox *rtDepth;
-    QRadioButton *gourand;
-    QRadioButton *phong;
-    QRadioButton *rt;
-    QCheckBox *persp;
-    QSpinBox *thrd;
     QLabel *label_45;
+    QRadioButton *gourand;
+    QRadioButton *rt;
     QPushButton *pushButton_4;
     QWidget *widget;
     QButtonGroup *buttonGroup_2;
@@ -250,6 +275,7 @@ public:
         blue = new QSpinBox(icoTab);
         blue->setObjectName(QString::fromUtf8("blue"));
         blue->setMaximum(255);
+        blue->setValue(110);
 
         gridLayout->addWidget(blue, 5, 2, 1, 1);
 
@@ -266,6 +292,7 @@ public:
         red = new QSpinBox(icoTab);
         red->setObjectName(QString::fromUtf8("red"));
         red->setMaximum(255);
+        red->setValue(10);
 
         gridLayout->addWidget(red, 5, 0, 1, 1);
 
@@ -277,6 +304,7 @@ public:
         green = new QSpinBox(icoTab);
         green->setObjectName(QString::fromUtf8("green"));
         green->setMaximum(255);
+        green->setValue(40);
 
         gridLayout->addWidget(green, 5, 1, 1, 1);
 
@@ -299,6 +327,7 @@ public:
         dispertion->setObjectName(QString::fromUtf8("dispertion"));
         dispertion->setMaximum(1.000000000000000);
         dispertion->setSingleStep(0.100000000000000);
+        dispertion->setValue(1.000000000000000);
 
         gridLayout->addWidget(dispertion, 8, 2, 1, 1);
 
@@ -311,6 +340,7 @@ public:
         reflection->setObjectName(QString::fromUtf8("reflection"));
         reflection->setMaximum(1.000000000000000);
         reflection->setSingleStep(0.100000000000000);
+        reflection->setValue(1.000000000000000);
 
         gridLayout->addWidget(reflection, 9, 2, 1, 1);
 
@@ -479,6 +509,151 @@ public:
         tabWidget->addTab(cubeTab, QString());
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
+        gridLayout_9 = new QGridLayout(tab);
+        gridLayout_9->setSpacing(6);
+        gridLayout_9->setContentsMargins(11, 11, 11, 11);
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        pX = new QLineEdit(tab);
+        pX->setObjectName(QString::fromUtf8("pX"));
+
+        gridLayout_9->addWidget(pX, 2, 0, 1, 1);
+
+        label_53 = new QLabel(tab);
+        label_53->setObjectName(QString::fromUtf8("label_53"));
+
+        gridLayout_9->addWidget(label_53, 4, 1, 1, 1);
+
+        label_54 = new QLabel(tab);
+        label_54->setObjectName(QString::fromUtf8("label_54"));
+
+        gridLayout_9->addWidget(label_54, 4, 2, 1, 1);
+
+        label_56 = new QLabel(tab);
+        label_56->setObjectName(QString::fromUtf8("label_56"));
+
+        gridLayout_9->addWidget(label_56, 6, 0, 1, 1);
+
+        pRef = new QDoubleSpinBox(tab);
+        pRef->setObjectName(QString::fromUtf8("pRef"));
+        pRef->setMaximum(1.000000000000000);
+        pRef->setSingleStep(0.100000000000000);
+        pRef->setValue(1.000000000000000);
+
+        gridLayout_9->addWidget(pRef, 9, 2, 1, 1);
+
+        label_51 = new QLabel(tab);
+        label_51->setObjectName(QString::fromUtf8("label_51"));
+
+        gridLayout_9->addWidget(label_51, 3, 0, 1, 3);
+
+        label_55 = new QLabel(tab);
+        label_55->setObjectName(QString::fromUtf8("label_55"));
+
+        gridLayout_9->addWidget(label_55, 6, 1, 1, 1);
+
+        pZ = new QLineEdit(tab);
+        pZ->setObjectName(QString::fromUtf8("pZ"));
+
+        gridLayout_9->addWidget(pZ, 2, 2, 1, 1);
+
+        pDisp = new QDoubleSpinBox(tab);
+        pDisp->setObjectName(QString::fromUtf8("pDisp"));
+        pDisp->setMaximum(1.000000000000000);
+        pDisp->setSingleStep(0.100000000000000);
+        pDisp->setValue(1.000000000000000);
+
+        gridLayout_9->addWidget(pDisp, 8, 2, 1, 1);
+
+        pY = new QLineEdit(tab);
+        pY->setObjectName(QString::fromUtf8("pY"));
+
+        gridLayout_9->addWidget(pY, 2, 1, 1, 1);
+
+        label_52 = new QLabel(tab);
+        label_52->setObjectName(QString::fromUtf8("label_52"));
+
+        gridLayout_9->addWidget(label_52, 4, 0, 1, 1);
+
+        pRed = new QSpinBox(tab);
+        pRed->setObjectName(QString::fromUtf8("pRed"));
+        pRed->setMaximum(255);
+        pRed->setValue(255);
+
+        gridLayout_9->addWidget(pRed, 5, 0, 1, 1);
+
+        label_49 = new QLabel(tab);
+        label_49->setObjectName(QString::fromUtf8("label_49"));
+
+        gridLayout_9->addWidget(label_49, 1, 1, 1, 1);
+
+        label_48 = new QLabel(tab);
+        label_48->setObjectName(QString::fromUtf8("label_48"));
+
+        gridLayout_9->addWidget(label_48, 1, 0, 1, 1);
+
+        label_47 = new QLabel(tab);
+        label_47->setObjectName(QString::fromUtf8("label_47"));
+
+        gridLayout_9->addWidget(label_47, 0, 0, 1, 1);
+
+        pGloss = new QLineEdit(tab);
+        pGloss->setObjectName(QString::fromUtf8("pGloss"));
+
+        gridLayout_9->addWidget(pGloss, 10, 2, 1, 1);
+
+        label_50 = new QLabel(tab);
+        label_50->setObjectName(QString::fromUtf8("label_50"));
+
+        gridLayout_9->addWidget(label_50, 1, 2, 1, 1);
+
+        label_57 = new QLabel(tab);
+        label_57->setObjectName(QString::fromUtf8("label_57"));
+
+        gridLayout_9->addWidget(label_57, 6, 2, 1, 1);
+
+        pGreen = new QSpinBox(tab);
+        pGreen->setObjectName(QString::fromUtf8("pGreen"));
+        pGreen->setMaximum(255);
+
+        gridLayout_9->addWidget(pGreen, 5, 1, 1, 1);
+
+        pBlue = new QSpinBox(tab);
+        pBlue->setObjectName(QString::fromUtf8("pBlue"));
+        pBlue->setMaximum(255);
+        pBlue->setValue(255);
+
+        gridLayout_9->addWidget(pBlue, 5, 2, 1, 1);
+
+        pHeight = new QLineEdit(tab);
+        pHeight->setObjectName(QString::fromUtf8("pHeight"));
+
+        gridLayout_9->addWidget(pHeight, 7, 1, 1, 1);
+
+        pWidth = new QLineEdit(tab);
+        pWidth->setObjectName(QString::fromUtf8("pWidth"));
+
+        gridLayout_9->addWidget(pWidth, 7, 0, 1, 1);
+
+        label_58 = new QLabel(tab);
+        label_58->setObjectName(QString::fromUtf8("label_58"));
+
+        gridLayout_9->addWidget(label_58, 8, 0, 1, 2);
+
+        label_59 = new QLabel(tab);
+        label_59->setObjectName(QString::fromUtf8("label_59"));
+
+        gridLayout_9->addWidget(label_59, 9, 0, 1, 2);
+
+        label_60 = new QLabel(tab);
+        label_60->setObjectName(QString::fromUtf8("label_60"));
+
+        gridLayout_9->addWidget(label_60, 10, 0, 1, 2);
+
+        pDepth = new QLineEdit(tab);
+        pDepth->setObjectName(QString::fromUtf8("pDepth"));
+
+        gridLayout_9->addWidget(pDepth, 7, 2, 1, 1);
+
         tabWidget->addTab(tab, QString());
         light = new QWidget();
         light->setObjectName(QString::fromUtf8("light"));
@@ -649,6 +824,23 @@ public:
         gridLayout_8->setSpacing(6);
         gridLayout_8->setContentsMargins(11, 11, 11, 11);
         gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        thrd = new QSpinBox(frame_5);
+        thrd->setObjectName(QString::fromUtf8("thrd"));
+        thrd->setMinimum(1);
+        thrd->setMaximum(8);
+        thrd->setValue(2);
+
+        gridLayout_8->addWidget(thrd, 4, 2, 1, 1);
+
+        phong = new QRadioButton(frame_5);
+        buttonGroup_2 = new QButtonGroup(MainWindow);
+        buttonGroup_2->setObjectName(QString::fromUtf8("buttonGroup_2"));
+        buttonGroup_2->addButton(phong);
+        phong->setObjectName(QString::fromUtf8("phong"));
+        phong->setChecked(false);
+
+        gridLayout_8->addWidget(phong, 1, 0, 1, 1);
+
         label_32 = new QLabel(frame_5);
         label_32->setObjectName(QString::fromUtf8("label_32"));
 
@@ -660,45 +852,23 @@ public:
 
         gridLayout_8->addWidget(rtDepth, 3, 2, 1, 1);
 
+        label_45 = new QLabel(frame_5);
+        label_45->setObjectName(QString::fromUtf8("label_45"));
+
+        gridLayout_8->addWidget(label_45, 4, 1, 1, 1);
+
         gourand = new QRadioButton(frame_5);
-        buttonGroup_2 = new QButtonGroup(MainWindow);
-        buttonGroup_2->setObjectName(QString::fromUtf8("buttonGroup_2"));
         buttonGroup_2->addButton(gourand);
         gourand->setObjectName(QString::fromUtf8("gourand"));
 
         gridLayout_8->addWidget(gourand, 0, 0, 1, 1);
 
-        phong = new QRadioButton(frame_5);
-        buttonGroup_2->addButton(phong);
-        phong->setObjectName(QString::fromUtf8("phong"));
-
-        gridLayout_8->addWidget(phong, 1, 0, 1, 1);
-
         rt = new QRadioButton(frame_5);
         buttonGroup_2->addButton(rt);
         rt->setObjectName(QString::fromUtf8("rt"));
+        rt->setChecked(true);
 
         gridLayout_8->addWidget(rt, 3, 0, 1, 1);
-
-        persp = new QCheckBox(frame_5);
-        persp->setObjectName(QString::fromUtf8("persp"));
-        persp->setChecked(false);
-        persp->setTristate(false);
-
-        gridLayout_8->addWidget(persp, 5, 1, 1, 2);
-
-        thrd = new QSpinBox(frame_5);
-        thrd->setObjectName(QString::fromUtf8("thrd"));
-        thrd->setMinimum(1);
-        thrd->setMaximum(8);
-        thrd->setValue(2);
-
-        gridLayout_8->addWidget(thrd, 4, 2, 1, 1);
-
-        label_45 = new QLabel(frame_5);
-        label_45->setObjectName(QString::fromUtf8("label_45"));
-
-        gridLayout_8->addWidget(label_45, 4, 1, 1, 1);
 
 
         gridLayout_2->addWidget(frame_5, 5, 0, 1, 2);
@@ -720,7 +890,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -742,21 +912,21 @@ public:
         label_10->setText(QApplication::translate("MainWindow", "\320\240\320\260\320\264\320\270\321\203\321\201:", nullptr));
         label_11->setText(QApplication::translate("MainWindow", "\320\232\320\276\321\215\321\204. \320\264\320\270\321\204\321\204\321\203\320\267\320\275\320\276\320\263\320\276 \320\276\321\201\320\262\320\265\321\211\320\265\320\275\320\270\321\217:", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "Y", nullptr));
-        gloss->setText(QApplication::translate("MainWindow", "0", nullptr));
+        gloss->setText(QApplication::translate("MainWindow", "1000", nullptr));
         label_8->setText(QApplication::translate("MainWindow", "\320\246\320\262\320\265\321\202:", nullptr));
         label_13->setText(QApplication::translate("MainWindow", "\320\232\320\276\321\215\321\204. \320\261\320\273\320\265\321\201\320\272\320\260: ", nullptr));
         label_12->setText(QApplication::translate("MainWindow", "\320\232\320\276\321\215\321\204. \320\267\320\265\321\200\320\272\320\260\320\273\321\214\320\275\320\276\320\263\320\276 \320\276\321\201\320\262\320\265\321\211\320\265\320\275\320\270\321\217:", nullptr));
         icoX->setText(QApplication::translate("MainWindow", "0", nullptr));
         label_6->setText(QApplication::translate("MainWindow", "B", nullptr));
-        icoZ->setText(QApplication::translate("MainWindow", "0", nullptr));
-        radius->setText(QApplication::translate("MainWindow", "0", nullptr));
+        icoZ->setText(QApplication::translate("MainWindow", "200", nullptr));
+        radius->setText(QApplication::translate("MainWindow", "100", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(icoTab), QApplication::translate("MainWindow", "\320\230\320\272\320\276\321\201\320\260\321\215\320\264\321\200", nullptr));
         depth->setText(QApplication::translate("MainWindow", "100", nullptr));
         label_18->setText(QApplication::translate("MainWindow", "\320\246\320\262\320\265\321\202 \320\277\320\260\321\200\320\260\320\273\320\273\320\265\320\273\320\265\320\277\320\270\320\277\320\265\320\264:", nullptr));
         height->setText(QApplication::translate("MainWindow", "100", nullptr));
         label_14->setText(QApplication::translate("MainWindow", "Y", nullptr));
         label_22->setText(QApplication::translate("MainWindow", "\320\250\320\270\321\200\320\270\320\275\320\260", nullptr));
-        cubeZ->setText(QApplication::translate("MainWindow", "0", nullptr));
+        cubeZ->setText(QApplication::translate("MainWindow", "200", nullptr));
         cubeY->setText(QApplication::translate("MainWindow", "0", nullptr));
         label_23->setText(QApplication::translate("MainWindow", "\320\222\321\213\321\201\320\276\321\202\320\260", nullptr));
         label_17->setText(QApplication::translate("MainWindow", "\320\246\320\265\320\275\321\202\321\200 \320\277\320\260\321\200\320\260\320\273\320\273\320\265\320\273\320\265\320\277\320\270\320\277\320\265\320\264:", nullptr));
@@ -773,7 +943,28 @@ public:
         label_26->setText(QApplication::translate("MainWindow", "\320\232\320\276\321\215\321\204. \320\267\320\265\321\200\320\272\320\260\320\273\321\214\320\275\320\276\320\263\320\276 \320\276\321\201\320\262\320\265\321\211\320\265\320\275\320\270\321\217:", nullptr));
         label_25->setText(QApplication::translate("MainWindow", "\320\232\320\276\321\215\321\204. \320\264\320\270\321\204\321\204\321\203\320\267\320\275\320\276\320\263\320\276 \320\276\321\201\320\262\320\265\321\211\320\265\320\275\320\270\321\217:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(cubeTab), QApplication::translate("MainWindow", "\320\237\320\260\321\200\320\260\320\273\320\273\320\265\320\273\320\265\320\277\320\270\320\277\320\265\320\264", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
+        pX->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_53->setText(QApplication::translate("MainWindow", "G", nullptr));
+        label_54->setText(QApplication::translate("MainWindow", "B", nullptr));
+        label_56->setText(QApplication::translate("MainWindow", "\320\250\320\270\321\200\320\270\320\275\320\260", nullptr));
+        label_51->setText(QApplication::translate("MainWindow", "\320\246\320\262\320\265\321\202 \320\277\321\200\320\270\320\267\320\274\321\213:", nullptr));
+        label_55->setText(QApplication::translate("MainWindow", "\320\222\321\213\321\201\320\276\321\202\320\260", nullptr));
+        pZ->setText(QApplication::translate("MainWindow", "300", nullptr));
+        pY->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_52->setText(QApplication::translate("MainWindow", "R", nullptr));
+        label_49->setText(QApplication::translate("MainWindow", "Y", nullptr));
+        label_48->setText(QApplication::translate("MainWindow", "X", nullptr));
+        label_47->setText(QApplication::translate("MainWindow", "\320\246\320\265\320\275\321\202\321\200 \320\277\321\200\320\270\320\267\320\274\321\213:", nullptr));
+        pGloss->setText(QApplication::translate("MainWindow", "1000", nullptr));
+        label_50->setText(QApplication::translate("MainWindow", "Z", nullptr));
+        label_57->setText(QApplication::translate("MainWindow", "\320\223\320\273\321\203\320\261\320\270\320\275\320\260", nullptr));
+        pHeight->setText(QApplication::translate("MainWindow", "200", nullptr));
+        pWidth->setText(QApplication::translate("MainWindow", "200", nullptr));
+        label_58->setText(QApplication::translate("MainWindow", "\320\232\320\276\321\215\321\204. \320\264\320\270\321\204\321\204\321\203\320\267\320\275\320\276\320\263\320\276 \320\276\321\201\320\262\320\265\321\211\320\265\320\275\320\270\321\217:", nullptr));
+        label_59->setText(QApplication::translate("MainWindow", "\320\232\320\276\321\215\321\204. \320\267\320\265\321\200\320\272\320\260\320\273\321\214\320\275\320\276\320\263\320\276 \320\276\321\201\320\262\320\265\321\211\320\265\320\275\320\270\321\217:", nullptr));
+        label_60->setText(QApplication::translate("MainWindow", "\320\232\320\276\321\215\321\204. \320\261\320\273\320\265\321\201\320\272\320\260: ", nullptr));
+        pDepth->setText(QApplication::translate("MainWindow", "200", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "\320\242\321\200\320\265\321\203\320\263\320\276\320\273\321\214\320\275\320\260\321\217 \320\277\321\200\320\270\320\267\320\274\320\260", nullptr));
         label_28->setText(QApplication::translate("MainWindow", "Y", nullptr));
         ltY->setText(QApplication::translate("MainWindow", "0", nullptr));
         label_35->setText(QString());
@@ -788,21 +979,23 @@ public:
         label_33->setText(QString());
         label_31->setText(QApplication::translate("MainWindow", "\320\232\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\321\213 \320\270\321\201\321\202\320\276\321\207\320\275\320\270\320\272\320\260:", nullptr));
         label_34->setText(QApplication::translate("MainWindow", "\320\230\320\275\321\202\320\265\320\275\321\201\320\270\320\262\320\275\320\276\321\201\321\202\321\214:", nullptr));
-        intens->setText(QApplication::translate("MainWindow", "100", nullptr));
+        intens->setText(QApplication::translate("MainWindow", "200", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(light), QApplication::translate("MainWindow", "\320\230\321\201\321\202\320\276\321\207\320\275\320\270\320\272 \321\201\320\262\320\265\321\202\320\260", nullptr));
         label_43->setText(QApplication::translate("MainWindow", "\320\236\320\261\321\212\320\265\320\272\321\202\321\213 \321\201\321\206\320\265\320\275\321\213", nullptr));
         label_46->setText(QApplication::translate("MainWindow", "\320\243\320\263\320\273\321\213 (\320\263\321\200\320\260\320\264\321\203\321\201\321\213):", nullptr));
+        rotZ->setText(QApplication::translate("MainWindow", "0", nullptr));
+        rotY->setText(QApplication::translate("MainWindow", "0", nullptr));
+        rotX->setText(QApplication::translate("MainWindow", "0", nullptr));
         label_40->setText(QApplication::translate("MainWindow", "\320\222\320\276\320\272\321\200\321\203\320\263 Y", nullptr));
         label_41->setText(QApplication::translate("MainWindow", "\320\222\320\276\320\272\321\200\321\203\320\263 X", nullptr));
         label_42->setText(QApplication::translate("MainWindow", "\320\222\320\276\320\272\321\200\321\203\320\263 Z", nullptr));
         pushButton_2->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\262\320\265\321\200\320\275\321\203\321\202\321\214 \320\276\320\261\321\212\320\265\320\272\321\202", nullptr));
         pushButton_5->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\276\320\261\321\212\320\265\320\272\321\202", nullptr));
-        label_32->setText(QApplication::translate("MainWindow", "/   \320\223\320\273\321\203\320\261\320\270\320\275\320\260", nullptr));
-        gourand->setText(QApplication::translate("MainWindow", "Z \320\261\321\203\321\204\321\204\320\265\321\200 + \320\223\321\203\321\200\320\276", nullptr));
         phong->setText(QApplication::translate("MainWindow", "Z \320\261\321\203\321\204\321\204\320\265\321\200 + \320\244\320\276\320\275\320\263", nullptr));
-        rt->setText(QApplication::translate("MainWindow", "\320\242\321\200\320\260\321\201\321\201\320\270\321\200\320\276\320\262\320\272\320\260 \320\273\321\203\321\207\320\265\320\271", nullptr));
-        persp->setText(QApplication::translate("MainWindow", "\320\237\320\265\321\200\321\201\320\277\320\265\320\272\321\202\320\270\320\262\320\260", nullptr));
+        label_32->setText(QApplication::translate("MainWindow", "/   \320\223\320\273\321\203\320\261\320\270\320\275\320\260", nullptr));
         label_45->setText(QApplication::translate("MainWindow", "/   \320\237\320\276\321\202\320\276\320\272\320\270", nullptr));
+        gourand->setText(QApplication::translate("MainWindow", "Z \320\261\321\203\321\204\321\204\320\265\321\200 + \320\223\321\203\321\200\320\276", nullptr));
+        rt->setText(QApplication::translate("MainWindow", "\320\242\321\200\320\260\321\201\321\201\320\270\321\200\320\276\320\262\320\272\320\260 \320\273\321\203\321\207\320\265\320\271", nullptr));
         pushButton_4->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\276\320\261\321\212\320\265\320\272\321\202", nullptr));
     } // retranslateUi
 

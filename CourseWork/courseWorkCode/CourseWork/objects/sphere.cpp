@@ -34,8 +34,6 @@ Sphere::Sphere(Point center, double radius)
 
 	std::vector<Face> vecFs;
 
-	//посмотреть построение UW сферы
-
 	vecFs.push_back(Face(vecPt[0], vecPt[11], vecPt[5]));
 	vecFs.push_back(Face(vecPt[0], vecPt[5], vecPt[1]));
 	vecFs.push_back(Face(vecPt[0], vecPt[1], vecPt[7]));
@@ -59,6 +57,20 @@ Sphere::Sphere(Point center, double radius)
 	vecFs.push_back(Face(vecPt[6], vecPt[2], vecPt[10]));
 	vecFs.push_back(Face(vecPt[8], vecPt[6], vecPt[7]));
 	vecFs.push_back(Face(vecPt[9], vecPt[8], vecPt[1]));
+
+	for (size_t i = 0; i < vecFs.size(); i++)
+	{
+		Point n = vecFs[i].getNormal();
+		auto verts = vecFs[i].getFaceVertices();
+
+		Point vecToCenter = getCenter() - verts[0];
+		vecToCenter.norm();
+
+		if ( n.scalarMult(vecToCenter) >= 0 )
+		{
+			vecFs[i].changeNormalDir();
+		}
+	}
 
 	std::shared_ptr<Mesh> pNewMesh(new Mesh(vecPt, vecFs));
 	setMesh(pNewMesh);
@@ -103,6 +115,7 @@ void Sphere::rotate(double xAngle, double yAngle, double zAngle)
 	double cosZ = cos(zAngle * PI / 180);
 
 	auto pts = _mesh->getVertices();
+	std::vector<Point> vecPt;
 
 	for(size_t i = 0; i < pts.size(); i++)
 	{
@@ -142,54 +155,51 @@ void Sphere::rotate(double xAngle, double yAngle, double zAngle)
 
 		tmp = tmp + getCenter();
 
-		_mesh->setVertice(i, tmp);
+		vecPt.push_back(tmp);
 	}
 
-	auto vecPt = _mesh->getVertices();
+	std::vector<Face> vecFs;
 
-	Face a(vecPt[0], vecPt[11], vecPt[5]);
-	_mesh->setFace(0, a);
-	a = Face(vecPt[0], vecPt[5], vecPt[1]);
-	_mesh->setFace(1, a);
-	a = Face(vecPt[0], vecPt[1], vecPt[7]);
-	_mesh->setFace(2, a);
-	a = Face(vecPt[0], vecPt[7], vecPt[10]);
-	_mesh->setFace(3, a);
-	a = Face(vecPt[0], vecPt[10], vecPt[11]);
-	_mesh->setFace(4, a);
+	vecFs.push_back(Face(vecPt[0], vecPt[11], vecPt[5]));
+	vecFs.push_back(Face(vecPt[0], vecPt[5], vecPt[1]));
+	vecFs.push_back(Face(vecPt[0], vecPt[1], vecPt[7]));
+	vecFs.push_back(Face(vecPt[0], vecPt[7], vecPt[10]));
+	vecFs.push_back(Face(vecPt[0], vecPt[10], vecPt[11]));
 
-	a = Face(vecPt[1], vecPt[5], vecPt[9]);
-	_mesh->setFace(5, a);
-	a = Face(vecPt[5], vecPt[11], vecPt[4]);
-	_mesh->setFace(6, a);
-	a = Face(vecPt[11], vecPt[10], vecPt[2]);
-	_mesh->setFace(7, a);
-	a = Face(vecPt[10], vecPt[7], vecPt[6]);
-	_mesh->setFace(8, a);
-	a = Face(vecPt[7], vecPt[1], vecPt[8]);
-	_mesh->setFace(9, a);
+	vecFs.push_back(Face(vecPt[1], vecPt[5], vecPt[9]));
+	vecFs.push_back(Face(vecPt[5], vecPt[11], vecPt[4]));
+	vecFs.push_back(Face(vecPt[11], vecPt[10], vecPt[2]));
+	vecFs.push_back(Face(vecPt[10], vecPt[7], vecPt[6]));
+	vecFs.push_back(Face(vecPt[7], vecPt[1], vecPt[8]));
 
-	a = Face(vecPt[3], vecPt[9], vecPt[4]);
-	_mesh->setFace(10, a);
-	a = Face(vecPt[3], vecPt[4], vecPt[2]);
-	_mesh->setFace(11, a);
-	a = Face(vecPt[3], vecPt[2], vecPt[6]);
-	_mesh->setFace(12, a);
-	a = Face(vecPt[3], vecPt[6], vecPt[8]);
-	_mesh->setFace(13, a);
-	a = Face(vecPt[3], vecPt[8], vecPt[9]);
-	_mesh->setFace(14, a);
+	vecFs.push_back(Face(vecPt[3], vecPt[9], vecPt[4]));
+	vecFs.push_back(Face(vecPt[3], vecPt[4], vecPt[2]));
+	vecFs.push_back(Face(vecPt[3], vecPt[2], vecPt[6]));
+	vecFs.push_back(Face(vecPt[3], vecPt[6], vecPt[8]));
+	vecFs.push_back(Face(vecPt[3], vecPt[8], vecPt[9]));
 
-	a = Face(vecPt[4], vecPt[9], vecPt[5]);
-	_mesh->setFace(15, a);
-	a = Face(vecPt[2], vecPt[4], vecPt[11]);
-	_mesh->setFace(16, a);
-	a = Face(vecPt[6], vecPt[2], vecPt[10]);
-	_mesh->setFace(17, a);
-	a = Face(vecPt[8], vecPt[6], vecPt[7]);
-	_mesh->setFace(18, a);
-	a = Face(vecPt[9], vecPt[8], vecPt[1]);
-	_mesh->setFace(19, a);
+	vecFs.push_back(Face(vecPt[4], vecPt[9], vecPt[5]));
+	vecFs.push_back(Face(vecPt[2], vecPt[4], vecPt[11]));
+	vecFs.push_back(Face(vecPt[6], vecPt[2], vecPt[10]));
+	vecFs.push_back(Face(vecPt[8], vecPt[6], vecPt[7]));
+	vecFs.push_back(Face(vecPt[9], vecPt[8], vecPt[1]));
+
+	for (size_t i = 0; i < vecFs.size(); i++)
+	{
+		Point n = vecFs[i].getNormal();
+		auto verts = vecFs[i].getFaceVertices();
+
+		Point vecToCenter = getCenter() - verts[0];
+		vecToCenter.norm();
+
+		if ( n.scalarMult(vecToCenter) >= 0 )
+		{
+			vecFs[i].changeNormalDir();
+		}
+	}
+
+	std::shared_ptr<Mesh> pNewMesh(new Mesh(vecPt, vecFs));
+	setMesh(pNewMesh);
 }
 
 

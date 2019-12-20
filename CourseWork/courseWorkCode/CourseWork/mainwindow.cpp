@@ -35,7 +35,7 @@ void MainWindow::on_pushButton_clicked()
 	if (ui->rt->isChecked())
 	{
 		clock_t st = clock();
-		_renderer->renderRaytrace(*_scene, int(ui->rtDepth->value()), (ui->persp->isChecked() ? false : true), ui->thrd->value());
+		_renderer->renderRaytrace(*_scene, int(ui->rtDepth->value()), ui->thrd->value());
 		clock_t end = clock();
 
 		std::cout << "(RT) Time to render: " << static_cast<double>(end - st) / CLOCKS_PER_SEC << std::endl;
@@ -124,6 +124,38 @@ void MainWindow::on_pushButton_4_clicked()
 
 		_cur_max_obj_id++;
 	}
+	else if (ui->tabWidget->currentIndex() == 2)
+	{
+		auto x = ui->pX->text().toDouble();
+		auto y = ui->pY->text().toDouble();
+		auto z = ui->pZ->text().toDouble();
+
+		auto r = ui->pRed->value();
+		auto g = ui->pGreen->value();
+		auto b = ui->pBlue->value();
+
+		auto disp = ui->pDisp->value();
+		auto ref = ui->pRef->value();
+		auto gloss = ui->pGloss->text().toDouble();
+
+		auto width = ui->pWidth->text().toDouble();
+		auto height = ui->pHeight->text().toDouble();
+		auto depth = ui->pDepth->text().toDouble();
+
+		auto newObj = new prism(Point(x, y, z), width, height, depth);
+		newObj->setColor(Point(r, g, b));
+		newObj->setGlossCoef(gloss);
+		newObj->setDispertionCoef(disp);
+		newObj->setReflecitonCoef(ref);
+		newObj->setName("prism" + std::to_string(_cur_max_obj_id));
+
+		std::shared_ptr<Object> p_newObj(newObj);
+		_scene->addObject(p_newObj);
+
+		ui->comboBox->addItem("prism" + QString::number(_cur_max_obj_id));
+
+		_cur_max_obj_id++;
+	}
 	else if (ui->tabWidget->currentIndex() == 3)
 	{
 		auto x = ui->ltX->text().toDouble();
@@ -143,6 +175,7 @@ void MainWindow::on_pushButton_4_clicked()
 
 		_cur_max_lt++;
 	}
+
 }
 
 void MainWindow::on_pushButton_5_clicked()

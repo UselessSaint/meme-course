@@ -273,7 +273,7 @@ Point zBuffer::calcLight(Point &pt, Point &n, Point &objColor, const Object &cur
 
 		pnt = pnt + n;
 
-		Point view(pnt.getX(), pnt.getY(), -800);
+        Point view(0, 0, -800);
 
 		Point tmp = (pnt-view);
 		tmp.norm();

@@ -1,0 +1,66 @@
+\begin{thebibliography}{10}
+\def\selectlanguageifdefined#1{
+\expandafter\ifx\csname date#1\endcsname\relax
+\else\language\csname l@#1\endcsname\fi}
+\ifx\undefined\url\def\url#1{{\small #1}}\else\fi
+\ifx\undefined\BibUrl\def\BibUrl#1{\url{#1}}\else\fi
+\ifx\undefined\BibAnnote\long\def\BibAnnote#1{(#1)}\else\fi
+\ifx\undefined\BibEmph\def\BibEmph#1{\emph{#1}}\else\fi
+
+\bibitem{1}
+\selectlanguageifdefined{russian}
+Ю.Н.~Косников. Поверхностные модели в
+  системах трехмерной компьютерной
+  графики.
+
+\bibitem{2}
+\selectlanguageifdefined{russian}
+Д.Ф.~Роджерс. Алгоритмические основы
+  машинной графики.
+
+\bibitem{3}
+\selectlanguageifdefined{russian}
+Закраска методом Гуро. URL:
+  http://www.mari-el.ru/mmlab/home/kg/Lection11/3.html.
+
+\bibitem{4}
+\selectlanguageifdefined{russian}
+РЕПИН~ВАДИМ. Особенности моделирования
+  света: Аппроксимации Фонга (Phong Shading). URL:
+  https://www.ixbt.com/video/light-model-phong.html.
+
+\bibitem{5}
+\selectlanguageifdefined{russian}
+П.В.Вельтмандер.
+\newblock Основные алгоритмы компьютерной
+  графики.
+
+\bibitem{6}
+\selectlanguageifdefined{russian}
+Чеканов.~Дмитрий. Метод трассировки лучей
+  против растеризации: новое поколение
+  качества графики? URL:  http://www.thg.ru/graphic/rayДы
+  tracing rasterization/onepage.html.
+
+\bibitem{7}
+\selectlanguageifdefined{russian}
+Стандарт языка С++11 согласно ISO. URL:
+  https://isocpp.org/std/the-standard.
+
+\bibitem{8}
+\selectlanguageifdefined{russian}
+Qt Documentation. URL:  https://doc.qt.io/.
+
+\bibitem{9}
+\selectlanguageifdefined{russian}
+std::thread. URL:  https://ru.cppreference.com/w/cpp/thread/thread.
+
+\bibitem{10}
+\selectlanguageifdefined{russian}
+std::mutex. URL:  https://ru.cppreference.com/w/cpp/thread/mutex.
+
+\bibitem{11}
+\selectlanguageifdefined{russian}
+<ctime> (time.h). URL:  http://www.cplusplus.com/reference/ctime/.
+
+\end{thebibliography}

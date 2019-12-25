@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.23)  23 DEC 2019 04:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.23)  25 DEC 2019 02:27
 entering extended mode
 **./rpz.tex
 (rpz.tex
@@ -913,6 +913,21 @@ File: pppdftex.def 2019/11/21 v0.5o Pdfpages driver for pdfTeX (AM)
 \AM@toc@title=\toks39
 \c@AM@survey=\count160
 \AM@templatesizebox=\box45
+) ("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ulem\ulem.sty"
+\UL@box=\box46
+\UL@hyphenbox=\box47
+\UL@skip=\skip51
+\UL@hook=\toks40
+\UL@height=\dimen192
+\UL@pe=\count161
+\UL@pixel=\dimen193
+\ULC@box=\box48
+Package: ulem 2012/05/18
+\ULdepth=\dimen194
+)
+("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\indentfirst.s
+ty"
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
 ("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geometry.s
 ty"
@@ -927,18 +942,18 @@ Package ifvtex Info: VTeX not detected.
 ty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count161
-\Gm@cntv=\count162
-\c@Gm@tempcnt=\count163
-\Gm@bindingoffset=\dimen192
-\Gm@wd@mp=\dimen193
-\Gm@odd@mp=\dimen194
-\Gm@even@mp=\dimen195
-\Gm@layoutwidth=\dimen196
-\Gm@layoutheight=\dimen197
-\Gm@layouthoffset=\dimen198
-\Gm@layoutvoffset=\dimen199
-\Gm@dimlist=\toks40
+\Gm@cnth=\count162
+\Gm@cntv=\count163
+\c@Gm@tempcnt=\count164
+\Gm@bindingoffset=\dimen195
+\Gm@wd@mp=\dimen196
+\Gm@odd@mp=\dimen197
+\Gm@even@mp=\dimen198
+\Gm@layoutwidth=\dimen199
+\Gm@layoutheight=\dimen256
+\Gm@layouthoffset=\dimen257
+\Gm@layoutvoffset=\dimen258
+\Gm@dimlist=\toks41
 
 ("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geometry.c
 fg"))
@@ -1016,35 +1031,35 @@ File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 ))
 \openout1 = `rpz.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
 
 ("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-pd
 f.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count164
-\scratchdimen=\dimen256
-\scratchbox=\box46
-\nofMPsegments=\count165
-\nofMParguments=\count166
-\everyMPshowfont=\toks41
-\MPscratchCnt=\count167
-\MPscratchDim=\dimen257
-\MPnumerator=\count168
-\makeMPintoPDFobject=\count169
-\everyMPtoPDFconversion=\toks42
+\scratchcounter=\count165
+\scratchdimen=\dimen259
+\scratchbox=\box49
+\nofMPsegments=\count166
+\nofMParguments=\count167
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count168
+\MPscratchDim=\dimen260
+\MPnumerator=\count169
+\makeMPintoPDFobject=\count170
+\everyMPtoPDFconversion=\toks43
 )
 ("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-b
 ase.sty"
@@ -1095,10 +1110,10 @@ G,.JBIG2,.JB2,.eps]
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.16} into 
 your preamble.
- on input line 98.
+ on input line 105.
 
-\c@lstlisting=\count170
-\AtBeginShipoutBox=\box47
+\c@lstlisting=\count171
+\AtBeginShipoutBox=\box50
 
 ("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\pdflscape.
 sty"
@@ -1118,15 +1133,15 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
-* v-part:(T,H,B)=(14.22636pt, 685.34625pt, 95.39737pt)
+* h-part:(L,W,R)=(56.9055pt, 528.93675pt, 28.45274pt)
+* v-part:(T,H,B)=(56.9055pt, 681.15898pt, 56.9055pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=430.00462pt
-* \textheight=685.34625pt
-* \oddsidemargin=19.8752pt
-* \evensidemargin=19.8752pt
-* \topmargin=-95.04362pt
+* \textwidth=528.93675pt
+* \textheight=681.15898pt
+* \oddsidemargin=-15.36449pt
+* \evensidemargin=-15.36449pt
+* \topmargin=-52.36449pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=12.0pt
@@ -1157,13 +1172,13 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 
 ]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 1.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 142.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 149.
 
 ("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 142.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 149.
 
 [6
 
@@ -1171,12 +1186,12 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 <cda.png, id=33, 472.76625pt x 334.24875pt>
 File: cda.png Graphic file (type png)
 <use cda.png>
-Package pdftex.def Info: cda.png  used on input line 180.
+Package pdftex.def Info: cda.png  used on input line 187.
 (pdftex.def)             Requested size: 330.93411pt x 233.97252pt.
  [8 <./cda.png>] [9]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--230
+Underfull \hbox (badness 10000) in paragraph at lines 235--237
 
  []
 
@@ -1186,176 +1201,184 @@ Underfull \hbox (badness 10000) in paragraph at lines 228--230
 <gourand.png, id=49, 253.69781pt x 155.83218pt>
 File: gourand.png Graphic file (type png)
 <use gourand.png>
-Package pdftex.def Info: gourand.png  used on input line 246.
+Package pdftex.def Info: gourand.png  used on input line 253.
 (pdftex.def)             Requested size: 253.69719pt x 155.8318pt.
- [11 <./gourand.png>] [12] [13]
-Overfull \hbox (14.63284pt too wide) in paragraph at lines 411--412
-[]\T2A/cmr/m/n/12 Тогда, ес-ли ре-зуль-тат трех век-тор-ных про-из-ве-де-ний $[
-]$x$[]$, $[]$x$[]$ и $[]\OML/cmm/m/it/12 x[]$
- []
-
-[14]
+<gourandBS.png, id=50, 121.45375pt x 753.81625pt>
+File: gourandBS.png Graphic file (type png)
+<use gourandBS.png>
+Package pdftex.def Info: gourandBS.png  used on input line 276.
+(pdftex.def)             Requested size: 72.87279pt x 452.29324pt.
+ [11 <./gourand.png>] [12 <./gourandBS.png>]
+<zbuffBS.png, id=60, 452.69125pt x 864.22874pt>
+File: zbuffBS.png Graphic file (type png)
+<use zbuffBS.png>
+Package pdftex.def Info: zbuffBS.png  used on input line 311.
+(pdftex.def)             Requested size: 226.34506pt x 432.11331pt.
+ [13 <./zbuffBS.png>]
+<rtBS.png, id=66, 463.7325pt x 1134.2375pt>
+File: rtBS.png Graphic file (type png)
+<use rtBS.png>
+Package pdftex.def Info: rtBS.png  used on input line 357.
+(pdftex.def)             Requested size: 231.86568pt x 567.11737pt.
+ [14]
+[15 <./rtBS.png>] [16] [17]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 3.
-[15
+[18
 
 ]
-<UI.png, id=68, 964.35281pt x 623.32875pt>
+<UI.png, id=83, 964.35281pt x 623.32875pt>
 File: UI.png Graphic file (type png)
 <use UI.png>
-Package pdftex.def Info: UI.png  used on input line 450.
+Package pdftex.def Info: UI.png  used on input line 472.
 (pdftex.def)             Requested size: 433.95476pt x 280.49535pt.
 
-Overfull \hbox (3.95013pt too wide) in paragraph at lines 450--451
- [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 470--471
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
 
  []
 
-<ico.png, id=69, 211.54031pt x 278.54062pt>
+<ico.png, id=84, 211.54031pt x 278.54062pt>
 File: ico.png Graphic file (type png)
 <use ico.png>
-Package pdftex.def Info: ico.png  used on input line 475.
+Package pdftex.def Info: ico.png  used on input line 497.
 (pdftex.def)             Requested size: 169.23247pt x 222.8328pt.
-<prism.png, id=70, 218.31563pt x 280.04625pt>
+<prism.png, id=85, 218.31563pt x 280.04625pt>
 File: prism.png Graphic file (type png)
 <use prism.png>
-Package pdftex.def Info: prism.png  used on input line 483.
+Package pdftex.def Info: prism.png  used on input line 505.
 (pdftex.def)             Requested size: 174.65273pt x 224.0373pt.
 
-Overfull \hbox (20.23529pt too wide) in paragraph at lines 472--488
+Overfull \hbox (20.23529pt too wide) in paragraph at lines 494--510
 []$[]$  $[]$ 
  []
 
-[16 <./UI.png>]
-<paral.png, id=75, 214.55156pt x 276.28218pt>
+[19 <./UI.png>]
+<paral.png, id=91, 214.55156pt x 276.28218pt>
 File: paral.png Graphic file (type png)
 <use paral.png>
-Package pdftex.def Info: paral.png  used on input line 492.
+Package pdftex.def Info: paral.png  used on input line 514.
 (pdftex.def)             Requested size: 171.64146pt x 221.02603pt.
-<lt.png, id=76, 217.5628pt x 282.30469pt>
+<lt.png, id=92, 217.5628pt x 282.30469pt>
 File: lt.png Graphic file (type png)
 <use lt.png>
-Package pdftex.def Info: lt.png  used on input line 500.
+Package pdftex.def Info: lt.png  used on input line 522.
 (pdftex.def)             Requested size: 174.05048pt x 225.84404pt.
 
-Overfull \hbox (20.23529pt too wide) in paragraph at lines 489--505
+Overfull \hbox (20.23529pt too wide) in paragraph at lines 511--527
 []$[]$  $[]$ 
  []
 
-<changes.png, id=77, 222.8325pt x 189.70876pt>
+<changes.png, id=93, 222.8325pt x 189.70876pt>
 File: changes.png Graphic file (type png)
 <use changes.png>
-Package pdftex.def Info: changes.png  used on input line 513.
+Package pdftex.def Info: changes.png  used on input line 535.
 (pdftex.def)             Requested size: 222.83195pt x 189.70828pt.
-[17 <./ico.png> <./prism.png> <./paral.png> <./lt.png>]
-<choose.png, id=85, 226.59656pt x 109.91063pt>
+[20 <./ico.png> <./prism.png> <./paral.png> <./lt.png>]
+<choose.png, id=101, 226.59656pt x 109.91063pt>
 File: choose.png Graphic file (type png)
 <use choose.png>
-Package pdftex.def Info: choose.png  used on input line 525.
+Package pdftex.def Info: choose.png  used on input line 547.
 (pdftex.def)             Requested size: 226.596pt x 109.91034pt.
- [18 <./changes.png> <./choose.png>]
+ [21 <./changes.png> <./choose.png>]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 4.
-<rt.png, id=91, 561.59813pt x 398.23781pt>
+<rt.png, id=107, 561.59813pt x 398.23781pt>
 File: rt.png Graphic file (type png)
 <use rt.png>
-Package pdftex.def Info: rt.png  used on input line 547.
+Package pdftex.def Info: rt.png  used on input line 569.
 (pdftex.def)             Requested size: 449.27911pt x 318.59067pt.
-
-Overfull \hbox (19.27449pt too wide) in paragraph at lines 547--548
- [] 
- []
-
-<rto.png, id=92, 466.74374pt x 371.88937pt>
+<rto.png, id=108, 466.74374pt x 371.88937pt>
 File: rto.png Graphic file (type png)
 <use rto.png>
-Package pdftex.def Info: rto.png  used on input line 555.
+Package pdftex.def Info: rto.png  used on input line 577.
 (pdftex.def)             Requested size: 373.3955pt x 297.51189pt.
-[19
+[22
 
  <./rt.png>]
-<gph.png, id=98, 429.10312pt x 357.58594pt>
+<gph.png, id=113, 429.10312pt x 357.58594pt>
 File: gph.png Graphic file (type png)
 <use gph.png>
-Package pdftex.def Info: gph.png  used on input line 563.
+Package pdftex.def Info: gph.png  used on input line 585.
 (pdftex.def)             Requested size: 343.28296pt x 286.06912pt.
-<zg.png, id=99, 461.47406pt x 370.38374pt>
+<zg.png, id=114, 461.47406pt x 370.38374pt>
 File: zg.png Graphic file (type png)
 <use zg.png>
-Package pdftex.def Info: zg.png  used on input line 571.
+Package pdftex.def Info: zg.png  used on input line 593.
 (pdftex.def)             Requested size: 369.17973pt x 296.30739pt.
- [20 <./rto.png> <./gph.png>] [21 <./zg.png>]
+ [23 <./rto.png> <./gph.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 620--622
+
+ []
+
+[24 <./zg.png>]
 PGFPlots: reading {RT1.dat}
 PGFPlots: reading {ZPH1.dat}
 PGFPlots: reading {ZG1.dat}
-LaTeX Font Info:    Try loading font information for T2A+cmtt on input line 646
+LaTeX Font Info:    Try loading font information for T2A+cmtt on input line 669
 .
 
 ("C:\Users\Tree\AppData\Local\Programs\MiKTeX 2.9\tex/latex/cyrillic\t2acmtt.fd
 "
 File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
-) [22]
-Underfull \hbox (badness 10000) in paragraph at lines 670--672
-
+)
+Overfull \hbox (31.01112pt too wide) in paragraph at lines 681--682
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
+]   |   []   |   []   |   []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 692--693
+Underfull \hbox (badness 10000) in paragraph at lines 691--693
+
+ []
+
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 713--714
 
  []
 
 PGFPlots: reading {RT2.dat}
 PGFPlots: reading {ZPH2.dat}
 PGFPlots: reading {ZG2.dat}
-[23] [24] (rpz.bbl [25
+[26] [27] [28
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 23--25
-[]\T2A/cmr/m/n/12 Закраска ме-то-дом Гу-ро. URL: http://www.mari-
+Overfull \hbox (3.50632pt too wide) in paragraph at lines 809--810
+[]\T2A/cmr/m/n/12 Режим до-сту-па: http://www.thg.ru/graphic/ray_tracing_raster
+ization/onepage.html По-след-няя
  []
 
+[29
 
-Underfull \hbox (badness 2181) in paragraph at lines 28--31
-[]\T2A/cmr/m/n/12 РЕПИН ВА-ДИМ. Осо-бен-но-сти мо-де-ли-ро-ва-ния све-та: Ап-пр
-ок-си-ма-ции
+]
+Overfull \hbox (22.991pt too wide) in paragraph at lines 834--835
+[]\T2A/cmr/m/n/12 Режим до-сту-па: http://www.cplusplus.com/reference/ctime/ По
+-след-няя да-та об-ра-ще-ния: 25.12.2019 
  []
 
-
-Underfull \hbox (badness 4144) in paragraph at lines 28--31
-\T2A/cmr/m/n/12 Фон-га (Phong Shading). URL: https://www.ixbt.com/video/light-m
-odel-
- []
-
-) [26
-
-] (rpz.aux) ) 
+[30] (rpz.aux) ) 
 Here is how much of TeX's memory you used:
- 27225 strings out of 492895
- 666895 string characters out of 3124202
- 1002092 words of memory out of 3000000
- 30633 multiletter control sequences out of 15000+200000
- 16082 words of font info for 39 fonts, out of 3000000 for 9000
+ 27307 strings out of 492895
+ 668012 string characters out of 3124202
+ 1005999 words of memory out of 3000000
+ 30707 multiletter control sequences out of 15000+200000
+ 16188 words of font info for 40 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,17n,96p,1187b,2203s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Tree\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/lh/lh-t2a
-/dpi600\latt1200.pk> <C:\Users\Tree\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/lh
-/lh-t2a/dpi600\labx1440.pk> <C:\Users\Tree\AppData\Local\MiKTeX\2.9\fonts/pk/lj
-four/lh/lh-t2a/dpi600\labx1728.pk> <C:\Users\Tree\AppData\Local\MiKTeX\2.9\font
-s/pk/ljfour/lh/lh-t2a/dpi600\labx1200.pk> <C:\Users\Tree\AppData\Local\MiKTeX\2
-.9\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx2488.pk> <C:\Users\Tree\AppData\Local\M
-iKTeX\2.9\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1200.pk><C:/Users/Tree/AppData/L
-ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Tr
-ee/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
-C:/Users/Tree/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmr12.pfb><C:/Users/Tree/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr8.pfb><C:/Users/Tree/AppData/Local/Programs/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Tree/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on rpz.pdf (26 pages, 461197 bytes).
+ 69i,17n,96p,1182b,2201s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Tree\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/lh/lh-
+t2a/dpi600\latt1200.pk> <C:\Users\Tree\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour
+/lh/lh-t2a/dpi600\labx1440.pk> <C:\Users\Tree\AppData\Local\MiKTeX\2.9\fonts/pk
+/ljfour/lh/lh-t2a/dpi600\labx1728.pk> <C:\Users\Tree\AppData\Local\MiKTeX\2.9\f
+onts/pk/ljfour/lh/lh-t2a/dpi600\labx1200.pk> <C:\Users\Tree\AppData\Local\MiKTe
+X\2.9\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx2488.pk> <C:\Users\Tree\AppData\Loca
+l\MiKTeX\2.9\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1200.pk><C:/Users/Tree/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users
+/Tree/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pf
+b><C:/Users/Tree/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr12.pfb><C:/Users/Tree/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb><C:/Users/Tree/AppData/Local/Programs/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Tree/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on rpz.pdf (30 pages, 521665 bytes).
 PDF statistics:
- 488 PDF objects out of 1000 (max. 8388607)
+ 508 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 78 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
 
